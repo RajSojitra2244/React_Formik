@@ -10,12 +10,12 @@ function FormikContainer() {
         {key:'Canada ',value:'Canada'},
         {key:'Dubai ',value:'Dubai'}
     ]
-    const radiobutton=[
+    const radiobuttonvalue=[
         {key:'Male',value:'Male'},
         {key:'Female',value:'Female'},
         {key:'Other',value:'Other'},
     ]
-    const checkBoxOption=[
+    const checkBoxOptionvalue=[
         {key:'Cricket',value:'Cricket'},
         {key:'Hockey',value:'Hockey'},
         {key:'KhoKho',value:'KhoKho'},
@@ -66,13 +66,13 @@ function FormikContainer() {
                     control='radio'
                     lable="Gender"
                     name='radiobutton'
-                    options={radiobutton}/>
+                    options={radiobuttonvalue}/>
 
                     <FormikControll
                     control='checkbox'
                     lable="Select Hobby"
                     name='checkBoxOption'
-                    options={checkBoxOption}/>
+                    options={checkBoxOptionvalue}/>
 
                     <FormikControll
                     control='date'

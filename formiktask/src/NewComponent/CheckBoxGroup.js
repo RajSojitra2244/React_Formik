@@ -4,11 +4,13 @@ import TextError from './TextError'
 
 function CheckBoxGroup(props) {
     const{lable,name,options,...rest}=props
+    console.log("hobby",name);
+    
     return (
     
                <div className="form-group">
                     <label htmlFor={name}>{lable}</label>
-                    <Field name={name} {...rest}>
+                    <Field name={name}>
                         {({field})=>{
                             console.log("field",field);
                             return options.map(option =>{
@@ -18,6 +20,7 @@ function CheckBoxGroup(props) {
                                     type='checkbox' 
                                     id={option.value}
                                     {...field}
+                                   
                                     value={option.value}
                                     checked={field.value.includes(option.value)}
                                     />
