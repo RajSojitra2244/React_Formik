@@ -107,16 +107,13 @@ const Formdata = () => {
         <div className="form-group">
         <label>Secondary phone number </label>
         <Field  type="text" className="form-control" name="phonenumber[1]" />
-
         </div>   
 
-      <button type="submit" className="btn btn-dark" >Submit</button>
+      <button type="submit"  className="btn btn-dark" >Submit</button>
     </Form>
     )
   }
 }
-     
-
     </Formik>
   
   );
