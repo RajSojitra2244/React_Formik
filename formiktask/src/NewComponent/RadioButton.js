@@ -10,7 +10,7 @@ function RadioButton(props) {
                     <label htmlFor={name}>{lable}</label>
                     <Field name={name} {...rest}>
                         {({field})=>{
-                            console.log("field",field);
+                            // console.log("field",field);
                             return options.map(option =>{
                                 return(
                                     <React.Fragment key={option.value}>

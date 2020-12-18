@@ -4,15 +4,12 @@ import TextError from './TextError'
 
 function CheckBoxGroup(props) {
     const{lable,name,options,...rest}=props
-    console.log("hobby",name);
-    
     return (
     
                <div className="form-group">
                     <label htmlFor={name}>{lable}</label>
-                    <Field name={name}>
+                    <Field name={name} {...rest}>
                         {({field})=>{
-                            console.log("field",field);
                             return options.map(option =>{
                                 return(
                                     <React.Fragment key={option.value}>
@@ -29,7 +26,6 @@ function CheckBoxGroup(props) {
                                 )
                             })
                         }
-
                         }
                     </Field>
                     <ErrorMessage name={name} component={TextError}/>

@@ -6,7 +6,7 @@ import RadioButton from './RadioButton'
 import Select from './Select'
 import TextArea from './TextArea'
 
-function FormikControll(props) {
+function FormikControl(props) {
     const{control,...rest} = props
    switch(control){
 
@@ -21,4 +21,4 @@ function FormikControll(props) {
    }
 }
 
-export default FormikControll
+export default FormikControl

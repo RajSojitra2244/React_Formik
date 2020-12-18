@@ -42,7 +42,7 @@ function LoginForm() {
                     lable='Password'
                     name='password'
                     />
-                    <button type="submit" disabled={(formik.dirty &&  !formik.isValid)}>Login</button>
+                    <button type="submit" className="btn btn-success" disabled={!formik.isValid}>Login</button>
                 </Form>
 
                 )

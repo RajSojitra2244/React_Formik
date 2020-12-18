@@ -5,7 +5,7 @@ import {Field,ErrorMessage} from 'formik'
 import TextError from './TextError'
 function DatePicker(props) {
     const{lable,name,...rest}=props
-    console.log("date",props);
+    // console.log("date",props);
     return (
     
                <div className="form-group">
