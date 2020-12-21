@@ -30,13 +30,14 @@ function LoginForm() {
             {formik=>{
                 return( <Form>
 
-                    <FormikControll
+                <FormikControll
                     control='input'
                     type='email'
                     lable='Email'
                     name='email'
                     />
-                 <FormikControll
+
+                <FormikControll
                     control='input'
                     type='password'
                     lable='Password'
