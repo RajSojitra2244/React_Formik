@@ -7,7 +7,7 @@ import{BrowserRouter,Switch,Route}from 'react-router-dom'
 import Index from './PrivateRouter/index'
 ReactDOM.render(
   <BrowserRouter>
-    <Index/>
+    <App/>
   </BrowserRouter>,
   document.getElementById('root')
 );

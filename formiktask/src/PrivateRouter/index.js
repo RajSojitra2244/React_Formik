@@ -1,6 +1,6 @@
 import React from 'react'
 import{Switch,Route, Router}from 'react-router-dom'
-import LoginForm from '../NewComponent/LoginForm'
+import LoginForm from '../Formik_Parts/LoginForm'
 import AppLayout from './AppLayout'
 import Editprofile from './Editprofile'
 import Errorpage from './Errorpage'

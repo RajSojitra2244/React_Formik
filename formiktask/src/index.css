@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: royalblue; */
+  background-image: url("./IMG/bgimg.png");
 }
 
 code {

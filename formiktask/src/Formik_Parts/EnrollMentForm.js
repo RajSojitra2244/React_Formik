@@ -46,6 +46,7 @@ const validateSkills = values => {
 
   const captchhandler = (e) => {
     setData(e);
+    console.log(e);
   };
 
   const onSubmit = (values) => {
@@ -92,7 +93,6 @@ const validateSkills = values => {
               onChange={(e) => captchhandler(e)}
             />
 
-            
             <button
               type="submit"
               className="btn btn-dark m-2"

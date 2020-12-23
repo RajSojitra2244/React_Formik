@@ -1,11 +1,10 @@
 // import './App.css';
-import EnrollMentForm from './NewComponent/EnrollMentForm';
+import EnrollMentForm from './Formik_Parts/EnrollMentForm';
 // import Form from './Component/formdata'
-import FormikContainer from './NewComponent/FormikContainer';
-import LoginForm from './NewComponent/LoginForm';
-import FormPage from './NewComponent/MDbootstrap/FormPage';
-import RegistrationForm from './NewComponent/RegistrationForm';
-import SimpleMap from './NewComponent/SimpleMap';
+import FormikContainer from './Formik_Parts/FormikContainer';
+import LoginForm from './Formik_Parts/LoginForm';
+import RegistrationForm from './Formik_Parts/RegistrationForm';
+import SimpleMap from './Formik_Parts/SimpleMap';
 import Table from './table'
 
 function App() {
@@ -15,10 +14,9 @@ function App() {
      {/* <Form/> */}
      {/* <FormikContainer/> */}
      {/* <LoginForm/> */}
-     {/* <RegistrationForm/> */}
+     <RegistrationForm/>
      {/* <EnrollMentForm/> */}
      {/* <SimpleMap/>
-     <FormPage/> */}
      {/* <Table/> */}
     </div>
    
