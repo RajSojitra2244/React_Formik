@@ -3,6 +3,7 @@ import {Field,ErrorMessage} from 'formik'
 import TextError from './TextError'
 function Select(props) {
     const{lable,name,options,...rest}=props
+    console.log("coures",props);
     return (
     
                <div className="form-group">

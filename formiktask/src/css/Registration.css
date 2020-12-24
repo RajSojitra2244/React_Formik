@@ -2,6 +2,7 @@
     margin-top: 10%;
     width: 29rem;
     justify-items: center;
+    border-radius: 20px;
 }
 .cardtitle{
     text-align: center;
@@ -11,13 +12,22 @@ p{
 }
 .nextbutton{
     text-align: center;
-    margin-left: 40%;
+    margin-left: 70%;
+    width: max-content;
 }
 .registrationMargin{
     margin-top: 30%;
 
 }
-
+.successimg{
+    height:60%;
+    width: 60%;
+    margin-left: 80px;
+}
+.registration{
+    display: flex;
+    justify-content: center;
+}
 
 
 
@@ -48,7 +58,7 @@ p{
     width: 70px;
     height: 70px;
     border: 2px solid white;
-    background-color: #1266f1 !important;
+    background-color: #1266f1;   
     color: white !important;
     border-radius: 50%;
     padding: 22px 18px 15px 18px;

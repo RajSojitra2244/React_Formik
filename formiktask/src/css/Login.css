@@ -1,0 +1,28 @@
+.card{
+    /* margin-top: 20%; */
+    justify-items: center;
+    border-radius: 20px;
+}
+.cardtitle{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+.nextbutton{
+    text-align: center;
+    margin-left: 70%;
+}
+.successimg{
+    height:60%;
+    width: 60%;
+    margin-left: 80px;
+}
+.login{
+    display: flex;
+    margin-top: 10%;
+    justify-content: center;
+}
+.registerHere{
+    margin-left: 50%;
+}

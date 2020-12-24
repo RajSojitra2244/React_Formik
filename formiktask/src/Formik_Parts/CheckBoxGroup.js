@@ -4,6 +4,7 @@ import TextError from './TextError'
 
 function CheckBoxGroup(props) {
     const{lable,name,options,...rest}=props
+    console.log("check",props);
     return (
     
                <div className="form-group">
@@ -17,7 +18,7 @@ function CheckBoxGroup(props) {
                                     type='checkbox' 
                                     id={option.value}
                                     {...field}
-                                   
+                                    {...rest}
                                     value={option.value}
                                     checked={field.value.includes(option.value)}
                                     />

@@ -12,13 +12,13 @@ import '../App.css'
 function Index() {
     return (
         <div className="App">
-            <Switch>
+            {/* <Switch>
                 <Route exact path="/" component={LoginForm}/>
                 <Route exact path="/login" component={LoginForm}/>
                 <ProtectedRoute exact path="/app" component={AppLayout}/>
                 <ProtectedRoute exact path="/edit" component={Editprofile}/>
                 <Route path="*" component={Errorpage}/>
-            </Switch>
+            </Switch> */}
         </div>
     )
 }

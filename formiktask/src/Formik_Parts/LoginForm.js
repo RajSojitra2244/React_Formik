@@ -2,7 +2,12 @@ import React from 'react'
 import {Field,ErrorMessage,Form,Formik} from 'formik'
 import TextError from './TextError'
 import FormikControll from './FormikControll'
+import {Link}from 'react-router-dom'
 import * as Yup from 'yup'
+import '../css/Login.css'
+import {Card,Button} from 'react-bootstrap'
+import Header from '../public_header/header'
+
 const initialValues={
     email:"",
     password:"",
@@ -22,6 +27,9 @@ const initialValues={
 function LoginForm() {
     
     return (
+        <div>
+            <Header/>
+        <div className="login">
         <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -30,6 +38,10 @@ function LoginForm() {
             {formik=>{
                 return( <Form>
 
+<Card  className="card">
+  <Card.Body>
+    <Card.Title className="cardtitle"><h1>Login</h1></Card.Title>
+    <Card.Body>
                 <FormikControll
                     control='input'
                     type='email'
@@ -43,7 +55,19 @@ function LoginForm() {
                     lable='Password'
                     name='password'
                     />
+                    <div className="row">
+                             <div className="col-6">
                     <button type="submit" className="btn btn-success" disabled={!formik.isValid}>Login</button>
+                            </div>
+                       <div className="col-6">     
+                    <Link className="registerHere" to='/'><u>Back</u></Link>
+                    <Link className="registerHere" to='/registration'><u>Register here</u></Link>
+                        </div>
+                    </div>
+    </Card.Body>
+  </Card.Body>
+</Card>
+ 
                 </Form>
 
                 )
@@ -51,6 +75,8 @@ function LoginForm() {
 
             }
         </Formik>
+        </div>
+        </div>
     )
 }
 

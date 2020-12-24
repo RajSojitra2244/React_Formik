@@ -1,4 +1,5 @@
 // import './App.css';
+import  Router  from './Route/RouterFile';
 import EnrollMentForm from './Formik_Parts/EnrollMentForm';
 // import Form from './Component/formdata'
 import FormikContainer from './Formik_Parts/FormikContainer';
@@ -14,10 +15,11 @@ function App() {
      {/* <Form/> */}
      {/* <FormikContainer/> */}
      {/* <LoginForm/> */}
-     <RegistrationForm/>
+     {/* <RegistrationForm/> */}
      {/* <EnrollMentForm/> */}
      {/* <SimpleMap/>
      {/* <Table/> */}
+     <Router/>
     </div>
    
   );
