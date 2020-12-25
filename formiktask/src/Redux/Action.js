@@ -33,7 +33,7 @@ export const getcountry = () => {
   };
 };
 // -----------------------------------------City-------------------------
-export const FETCH_STATE_BEGIN = 'FETCH_COUNTRY_BEGIN';
+export const FETCH_STATE_BEGIN = 'FETCH_STATE_Signup';
 export const FETCH_STATE_SUCCESS = 'FETCH_STATE_SUCCESS';
 export const FETCH_STATE_FAILURE = 'FETCH_STATE_FAILURE';
 
@@ -69,3 +69,37 @@ export const getCity = (city) => {
 };
 
 //-----------------------------------
+export const FETCH_SIGNUP_BEGIN = 'FETCH_SIGNUP_BEGIN';
+export const FETCH_SIGNUP_SUCCESS = 'FETCH_SIGNUP_SUCCESS';
+export const FETCH_SIGNUP_FAILURE = 'FETCH_SIGNUP_FAILURE';
+
+export const fetchSignupBegin = () => ({
+  type: FETCH_SIGNUP_BEGIN,
+});
+
+export const fetchSignupSuccess = (products) => ({
+  type: FETCH_SIGNUP_SUCCESS,
+  payload: products,
+});
+
+export const fetchSignupFailure = (error) => ({
+  type: FETCH_SIGNUP_FAILURE,
+  payload: error,
+});
+
+export const getCity = (city) => {
+  return (dispatch) => {
+    dispatch(fetchStateBegin());
+    axios
+      .get(`${process.env.REACT_APP_API}/api/getStateById/${city}`)
+      .then((Response) => {
+        const country = Response.data.stateList;
+        console.log(country);
+        dispatch(fetchStateSuccess(country));
+      })
+      .catch((error) => {
+        const errors = error.message;
+        dispatch(fetchStateFailure(errors));
+      });
+  };
+};
