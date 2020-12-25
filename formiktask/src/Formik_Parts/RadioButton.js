@@ -3,7 +3,7 @@ import {Field,ErrorMessage} from 'formik'
 import TextError from './TextError'
 
 function RadioButton(props) {
-    const{lable,name,options,...rest}=props
+    const{lable,name,option,...rest}=props
     return (
     
                <div className="form-group">
@@ -11,7 +11,7 @@ function RadioButton(props) {
                     <Field name={name} {...rest}>
                         {({field})=>{
                             // console.log("field",field);
-                            return options.map(option =>{
+                            return option.map(option =>{
                                 return(
                                     <React.Fragment key={option.value}>
                                     <input 

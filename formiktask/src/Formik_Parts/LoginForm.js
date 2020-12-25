@@ -60,7 +60,6 @@ function LoginForm() {
                     <button type="submit" className="btn btn-success" disabled={!formik.isValid}>Login</button>
                             </div>
                        <div className="col-6">     
-                    <Link className="registerHere" to='/'><u>Back</u></Link>
                     <Link className="registerHere" to='/registration'><u>Register here</u></Link>
                         </div>
                     </div>

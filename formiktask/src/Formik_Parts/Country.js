@@ -1,7 +1,7 @@
 import React from 'react'
 import {Field,ErrorMessage} from 'formik'
 import TextError from './TextError'
-function Select(props) {
+function Country(props) {
     const{lable,name,options,...rest}=props
     return (
     
@@ -9,9 +9,9 @@ function Select(props) {
                     <label htmlFor={name}>{lable}</label>
                     <Field as='select' id={name} name={name} {...rest}>
                         {
-                            options.map((option)=>{
+                           options && options.map((option)=>{
                                 return(
-                                    <option key={option.key} value={option.value}>{option.key}</option>
+                                    <option key={option.Id} value={option.Id}>{option.CountryName}</option>
                                 )
                             })
                         }
@@ -24,5 +24,5 @@ function Select(props) {
     )
 }
 
-export default Select
+export default Country
 

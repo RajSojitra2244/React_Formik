@@ -7,19 +7,15 @@ import LoginForm from './Formik_Parts/LoginForm';
 import RegistrationForm from './Formik_Parts/RegistrationForm';
 import SimpleMap from './Formik_Parts/SimpleMap';
 import Table from './table'
+import {Provider} from 'react-redux'
+import store from './Redux/Store'
 
 function App() {
   return (
-   
-    <div className="App">
-     {/* <Form/> */}
-     {/* <FormikContainer/> */}
-     {/* <LoginForm/> */}
-     {/* <RegistrationForm/> */}
-     {/* <EnrollMentForm/> */}
-     {/* <SimpleMap/>
-     {/* <Table/> */}
+    <div>
+  <Provider store={store}>
      <Router/>
+  </Provider>
     </div>
    
   );

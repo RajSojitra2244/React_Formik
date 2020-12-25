@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ToastContainer, toast } from 'react-toastify';
+
 import{BrowserRouter,Switch,Route}from 'react-router-dom'
 import Index from './PrivateRouter/index'
 ReactDOM.render(
