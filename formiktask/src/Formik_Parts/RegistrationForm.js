@@ -45,7 +45,7 @@ const history = useHistory()
         email:'',
         password:'',
         confirmPassword:'',
-        PhoneNo:'',
+        phoneNo:'',
         address:'',
         skill:[],
         pincode:'',
@@ -53,13 +53,13 @@ const history = useHistory()
         city:'',
         country:'',
         state:'',
-        date:null
+        // date:null
     }
 
   const validationSchema= Yup.object(
             initialValues.name==''&&{
             name:Yup.string().required('Required!'),
-            PhoneNo: Yup.number().typeError('Only Number Allowed').required('PhoneNo Required*'),
+            phoneNo: Yup.number().typeError('Only Number Allowed').required('PhoneNo Required*'),
             email:Yup.string().email('Invalid Email format').required('Required!') }   )
  const validateSkills = values => {
     let error
@@ -69,13 +69,13 @@ const history = useHistory()
    
     return error
 }
-const validateDate = values => {
-    let errors
-     if( values===null){
-        errors = "Required!"
-        }
-    return errors
-}
+// const validateDate = values => {
+//     let errors
+//      if( values===null){
+//         errors = "Required!"
+//         }
+//     return errors
+// }
 const validateCourse = values => {
     let errors
      if( values===''){
@@ -157,13 +157,14 @@ const previousForm = ()=>{
        if(values){
            setFormNumber(FormNumber +1)
         }
-       {!initialValues.Date == null && setFormNumber(FormNumber + 1)} 
+       {!initialValues.password == null && setFormNumber(FormNumber + 1)} 
    }
      if(FormNumber ==4){
         if(values){
             setRegistration(true)
         }
     }
+    console.log("AllData",values);
 }
 {Registration==true && 
     toast.success("Registration Successfull")
@@ -269,7 +270,7 @@ const previousForm = ()=>{
                     type='text'
                     lable='Phone no*'
                     min="0"
-                    name='PhoneNo'
+                    name='phoneNo'
                     />
                 
                     </>
@@ -290,14 +291,12 @@ const previousForm = ()=>{
                   validate={validateSkills}
                   options={checkBoxOptions}
                 />
-
-             <FormikControl
-                  control="date"
-                  lable="Date*"
-                  type="date"
-                  name="date"
-                  validate={validateDate}
-             />
+                <FormikControl
+                  control='textarea'
+                  type='text'
+                  lable='Address*'
+                  name='address'
+                validate={validateaddress} />
 
                     </>
                      }
@@ -325,12 +324,7 @@ const previousForm = ()=>{
                     name='pincode'
                   validate={validatepincode} />
 
-                  <FormikControl
-                  control='textarea'
-                  type='text'
-                  lable='Address*'
-                  name='address'
-                validate={validateaddress} />
+                 
                    
                     </>
                      }
