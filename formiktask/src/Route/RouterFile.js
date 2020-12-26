@@ -5,6 +5,8 @@ import RegistrationForm from '../Formik_Parts/RegistrationForm'
 import Header from '../public_header/header'
 import Home from '../public_header/header'
 import { ToastContainer, toast } from 'react-toastify';
+import Dashboard from '../Private_Part/Dashboard'
+import ProtectedRoute from '../PrivateRouter/ProtectedRoute'
 
 function RouterFile() {
     return (
@@ -16,6 +18,9 @@ function RouterFile() {
             <Route exact path="/home" component={Home}/>
             <Route exact path="/login" component={LoginForm}/>
             <Route exact path="/registration" component={RegistrationForm}/>
+
+            <ProtectedRoute exact path="/dash" component={Dashboard}/>
+            <ProtectedRoute exact path="/" component={Dashboard}/>
 
             
             {/* <Route path="*" component={Errorpage}/> */}

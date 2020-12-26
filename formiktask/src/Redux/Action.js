@@ -1,4 +1,7 @@
 import axios from 'axios';
+import Auth from '../PrivateRouter/auth'
+
+import {toast}from 'react-toastify'
 export const FETCH_COUNTRY_BEGIN = 'FETCH_COUNTRY_BEGIN';
 export const FETCH_COUNTRY_SUCCESS = 'FETCH_COUNTRY_SUCCESS';
 export const FETCH_COUNTRY_FAILURE = 'FETCH_COUNTRY_FAILURE';
@@ -68,7 +71,7 @@ export const getCity = (city) => {
   };
 };
 
-//-----------------------------------
+//-----------------------------------Signup--------------------------//
 export const FETCH_SIGNUP_BEGIN = 'FETCH_SIGNUP_BEGIN';
 export const FETCH_SIGNUP_SUCCESS = 'FETCH_SIGNUP_SUCCESS';
 export const FETCH_SIGNUP_FAILURE = 'FETCH_SIGNUP_FAILURE';
@@ -87,19 +90,76 @@ export const fetchSignupFailure = (error) => ({
   payload: error,
 });
 
-export const getCity = (city) => {
+export const SendingSignUpRequest = (data) => {
+  console.log("data",data);
   return (dispatch) => {
-    dispatch(fetchStateBegin());
+    dispatch(fetchSignupBegin());
     axios
-      .get(`${process.env.REACT_APP_API}/api/getStateById/${city}`)
+      .post(`${process.env.REACT_APP_API}/api/signin`,data)
       .then((Response) => {
-        const country = Response.data.stateList;
-        console.log(country);
-        dispatch(fetchStateSuccess(country));
+        if(Response.data.ResponseStatus !== 0){
+          toast.error(Response.data.message)
+        }
+          if(Response.data.ResponseStatus == 0){ 
+            dispatch(fetchSignupSuccess(data)) 
+            toast.success(Response.data.message)
+            console.log("Signup",Response.data.message);
+            ;}
       })
       .catch((error) => {
         const errors = error.message;
-        dispatch(fetchStateFailure(errors));
+        dispatch(fetchSignupFailure(errors));
+      });
+  };
+};
+
+
+//-----------------------------------Login--------------------------//
+export const FETCH_LOGIN_BEGIN = 'FETCH_LOGIN_BEGIN';
+export const FETCH_LOGIN_SUCCESS = 'FETCH_LOGIN_SUCCESS';
+export const FETCH_LOGIN_FAILURE = 'FETCH_LOGIN_FAILURE';
+
+export const fetchLoginBegin = () => ({
+  type: FETCH_LOGIN_BEGIN,
+});
+
+export const fetchLoginSuccess = (products) => ({
+  type: FETCH_LOGIN_SUCCESS,
+  payload: products,
+});
+
+export const fetchLoginFailure = (error) => ({
+  type: FETCH_LOGIN_FAILURE,
+  payload: error,
+});
+
+export const SendingLoginRequest = (data,props) => {
+  console.log("data",data);
+  return (dispatch) => {
+    dispatch(fetchLoginBegin());
+    axios
+      .post(`${process.env.REACT_APP_API}/api/login`,data)
+      .then((Response) => {
+        console.log("Login",Response);
+        const data = Response.data
+
+        if(Response.data.ResponseStatus !== 0){
+          localStorage.removeItem('logintoken')
+          toast.error(Response.data.message)
+        }
+          if(Response.data.ResponseStatus == 0){ 
+            dispatch(fetchLoginSuccess(data)) 
+            toast.success(Response.data.message)
+              Auth.login(() => {
+                toast.success(" Login Successfull !!")
+                localStorage.setItem('logintoken', data.token)
+                props.history.push("/dash")
+            })
+            }
+      })
+      .catch((error) => {
+        const errors = error.message;
+        dispatch(fetchLoginFailure(errors));
       });
   };
 };

@@ -5,27 +5,32 @@ import FormikControll from './FormikControll'
 import {Link}from 'react-router-dom'
 import * as Yup from 'yup'
 import '../css/Login.css'
+import { useHistory } from "react-router-dom";
 import {Card,Button} from 'react-bootstrap'
 import Header from '../public_header/header'
-
+import { SendingLoginRequest } from '../Redux/Action'
+import {useDispatch} from 'react-redux' 
+function LoginForm(props) {
+  const history =useHistory()
+  let  dispatch = useDispatch()
+    
 const initialValues={
-    email:"",
+  email:"",
     password:"",
    
   },
-   onSubmit =(values,onSubmitProps) => {
+  onSubmit =(values,onSubmitProps) => {
     console.log('Form data', values);
-    onSubmitProps.resetForm();
-  },
+    // onSubmitProps.resetForm();
+    // history.push('/dash')
+    dispatch(SendingLoginRequest(values,props))
+  }
   
-   validationSchema=Yup.object({
+  const validationSchema=Yup.object({
     email:Yup.string().email('Invalid email Format').required('Required!'),
     password:Yup.string().required('Required!'),
   })
 
-
-function LoginForm() {
-    
     return (
         <div>
             <Header/>

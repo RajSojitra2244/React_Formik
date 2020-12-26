@@ -9,6 +9,7 @@ import SimpleMap from './Formik_Parts/SimpleMap';
 import Table from './table'
 import {Provider} from 'react-redux'
 import store from './Redux/Store'
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   return (
