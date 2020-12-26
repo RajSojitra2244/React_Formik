@@ -1,6 +1,9 @@
 import {FETCH_COUNTRY_BEGIN,FETCH_COUNTRY_SUCCESS,FETCH_COUNTRY_FAILURE,
-        FETCH_STATE_BEGIN,FETCH_STATE_FAILURE,FETCH_STATE_SUCCESS} from './Action';
-import {countrydata,statedata} from './state'
+        FETCH_STATE_BEGIN,FETCH_STATE_FAILURE,FETCH_STATE_SUCCESS,
+        FETCH_SIGNUP_BEGIN,FETCH_SIGNUP_FAILURE,FETCH_SIGNUP_SUCCESS,
+        FETCH_LOGIN_BEGIN,FETCH_LOGIN_FAILURE,FETCH_LOGIN_SUCCESS,
+      } from './Action';
+import {countrydata,statedata,Signupdata,Logindata} from './state'
 
 export   const Countryreducer=(state = countrydata, action)=>{
   switch (action.type) {
@@ -54,6 +57,66 @@ export   const Statereducer=(state = statedata, action)=>{
         ...state,
         loading: false,
         stateData: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+
+//---------------------------------Signup-------------------------------//
+
+export   const SignUPreducer=(state = Signupdata, action)=>{
+  console.log("payload",action.payload);
+  switch (action.type) {
+    case FETCH_SIGNUP_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case FETCH_LOGIN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        SignupResponce: [],
+        error: action.payload,
+      };
+
+    case FETCH_SIGNUP_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        SignupResponce: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+//----------------------------Login---------------------------------------------//
+export   const Loginreducer=(state = Logindata, action)=>{
+  switch (action.type) {
+    case FETCH_LOGIN_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case FETCH_LOGIN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        Login: [],
+        error: action.payload,
+      };
+
+    case FETCH_LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        // LoginToken:action,
+        Login: action.payload,
       };
 
     default:

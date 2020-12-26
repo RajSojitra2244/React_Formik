@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux'
-import {Countryreducer, Statereducer} from './Reducer'
+import {Countryreducer, SignUPreducer, Statereducer,Loginreducer} from './Reducer'
 
 const rootreducer =combineReducers({
    country: Countryreducer,
-   state:Statereducer
+   state:Statereducer,
+   signup:SignUPreducer,
+   login:Loginreducer
 })
 
 

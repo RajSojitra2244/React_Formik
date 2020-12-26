@@ -9,7 +9,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import SuccessfullRegistration from '../IMG/successfull.png'
 import Header from '../public_header/header'
 import {useDispatch,useSelector} from 'react-redux'
-import { getcountry, getCity,SendingSignupRequest } from '../Redux/Action'
+import {BaseUrl} from '../API/BaseAPI'
+import { getcountry, getCity,SendingSignUpRequest } from '../Redux/Action'
+import TextError from './TextError'
  const deopdownoption = [
     { key: 'Select Course', value: '' },
     { key: 'React', value: 'React' },
@@ -23,19 +25,14 @@ import { getcountry, getCity,SendingSignupRequest } from '../Redux/Action'
 ];
 function RegistrationForm() {
     let  dispatch = useDispatch()
- const [country, setcountry] = useState(1)
  const [FormNumber, setFormNumber] = useState(1)
  const [Password, setPassword] = useState()
  const [Registration, setRegistration] = useState(false)
- 
 const CountryArray = useSelector(state => state.country.country)
 const CityArraySecond = useSelector(state => state.state.stateData)
-const CityArrayFirst = [{Id:"",CountryName:"Select Country"}]
  useEffect(() => { 
-     if(country === 1){
          dispatch(getcountry())
-     }
-},[country])
+},[])
 const history = useHistory()
    
   const   initialValues={
@@ -51,6 +48,7 @@ const history = useHistory()
         city:'',
         country:'',
         state:'',
+        
     }
 
   const validationSchema= Yup.object(
@@ -66,7 +64,6 @@ const history = useHistory()
    
     return error
 }
-
 const validateCourse = values => {
     let errors
      if( values===''){
@@ -77,15 +74,17 @@ const validateCourse = values => {
 const validatepassword = values => {
     setPassword(values)
     let errors
-     if( values===''){
+    if( values===''){
         errors = "Required!"
-        }
+    }
+    if(values.length != 6){  errors ="Enter minimum six digit"}
+    console.log("store",values.length);
     return errors
 }
 const validateconfimPassword = values => {
     let errors
-     if( values===''){
-         errors = "Required!"
+    if( values===''){
+        errors = "Required!"
          return errors
         }
         if(values !== Password){ 
@@ -95,14 +94,9 @@ const validateconfimPassword = values => {
   
 }
 const validatepincode = values => {
-    // let storepin=[]
     let errors
-    // storepin.push(values)
-    if( values===''){
-      errors = "Required!"
-      }
-    // if(storepin.length <= 5){ return errors="Maximum six digit allowed"}
-        // if(values.typeof)
+    if( values===''){ errors = "Required!" }
+    if(values.length != 6){  errors ="Enter minimum six digit"}
     return errors
 }
 const validateaddress = values =>{
@@ -134,6 +128,9 @@ const validatestate = values =>{
     if( values===''){
        errors = " State is required!"
        }
+       const checkvalues= Number.isInteger(values)
+       console.log("city",checkvalues);
+
    return errors
 }
 const previousForm = ()=>{
@@ -153,15 +150,14 @@ const previousForm = ()=>{
      if(FormNumber ==4){
         if(values){
             setRegistration(true)
-            dispatch(SendingSignupRequest(values))
-
+            dispatch(SendingSignUpRequest(values))
         }
     }
     console.log("AllData",values);
 }
-{Registration==true && 
-    toast.success("Registration Successfull")
-}
+// {Registration==true && 
+//     toast.success("Registration Successfull")
+// }
 
  const BackTologin=()=>{
     history.push('/login')

@@ -8,9 +8,15 @@ export const statedata={
     loading: false,
     error: null
     }
-    export const Signup={
+    export const Signupdata={
         SignupResponce: [],
         loading: false,
         error: null
         }
-    
+        export const Logindata={
+            Login: [],
+            LoginToken:'',
+            loading: false,
+            error: null
+            }
+           
