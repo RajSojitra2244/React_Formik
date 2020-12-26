@@ -9,9 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import SuccessfullRegistration from '../IMG/successfull.png'
 import Header from '../public_header/header'
 import {useDispatch,useSelector} from 'react-redux'
-import {BaseUrl} from '../API/BaseAPI'
-import { getcountry, getCity } from '../Redux/Action'
-import TextError from './TextError'
+import { getcountry, getCity,SendingSignupRequest } from '../Redux/Action'
  const deopdownoption = [
     { key: 'Select Course', value: '' },
     { key: 'React', value: 'React' },
@@ -48,12 +46,11 @@ const history = useHistory()
         phoneNo:'',
         address:'',
         skill:[],
-        pincode:'',
+        pinCode:'',
         course:'',
         city:'',
         country:'',
         state:'',
-        // date:null
     }
 
   const validationSchema= Yup.object(
@@ -69,13 +66,7 @@ const history = useHistory()
    
     return error
 }
-// const validateDate = values => {
-//     let errors
-//      if( values===null){
-//         errors = "Required!"
-//         }
-//     return errors
-// }
+
 const validateCourse = values => {
     let errors
      if( values===''){
@@ -162,6 +153,8 @@ const previousForm = ()=>{
      if(FormNumber ==4){
         if(values){
             setRegistration(true)
+            dispatch(SendingSignupRequest(values))
+
         }
     }
     console.log("AllData",values);
@@ -321,7 +314,7 @@ const previousForm = ()=>{
                     control='input'
                     type='text'
                     lable='Pincode*'
-                    name='pincode'
+                    name='pinCode'
                   validate={validatepincode} />
 
                  

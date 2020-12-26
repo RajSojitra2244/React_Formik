@@ -87,19 +87,19 @@ export const fetchSignupFailure = (error) => ({
   payload: error,
 });
 
-export const getCity = (city) => {
+export const SendingSignupRequest = ({data}) => {
   return (dispatch) => {
-    dispatch(fetchStateBegin());
+    dispatch(fetchSignupBegin());
     axios
-      .get(`${process.env.REACT_APP_API}/api/getStateById/${city}`)
+      .get(`${process.env.REACT_APP_API}/api/signId/${data}`)
       .then((Response) => {
-        const country = Response.data.stateList;
-        console.log(country);
-        dispatch(fetchStateSuccess(country));
+        console.log("Response",Response);
+        // const country = Response.data.stateList;
+        // dispatch(fetchSignupSuccess(country));
       })
       .catch((error) => {
         const errors = error.message;
-        dispatch(fetchStateFailure(errors));
+        dispatch(fetchSignupFailure(errors));
       });
+    };
   };
-};
