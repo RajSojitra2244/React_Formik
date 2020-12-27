@@ -1,11 +1,13 @@
-import {FETCH_COUNTRY_BEGIN,FETCH_COUNTRY_SUCCESS,FETCH_COUNTRY_FAILURE,
-        FETCH_STATE_BEGIN,FETCH_STATE_FAILURE,FETCH_STATE_SUCCESS,
-        FETCH_SIGNUP_BEGIN,FETCH_SIGNUP_FAILURE,FETCH_SIGNUP_SUCCESS,
-        FETCH_LOGIN_BEGIN,FETCH_LOGIN_FAILURE,FETCH_LOGIN_SUCCESS,
-      } from './Action';
-import {countrydata,statedata,Signupdata,Logindata} from './state'
+import {
+  FETCH_COUNTRY_BEGIN, FETCH_COUNTRY_SUCCESS, FETCH_COUNTRY_FAILURE,
+  FETCH_STATE_BEGIN, FETCH_STATE_FAILURE, FETCH_STATE_SUCCESS,
+  FETCH_SIGNUP_BEGIN, FETCH_SIGNUP_FAILURE, FETCH_SIGNUP_SUCCESS,
+  FETCH_LOGIN_BEGIN, FETCH_LOGIN_FAILURE, FETCH_LOGIN_SUCCESS,
+} from './Action';
+import { FETCH_BLOG_BEGIN, FETCH_BLOG_SUCCESS, FETCH_BLOG_FAILURE } from './Blog/BlogAction'
+import { countrydata, statedata, Signupdata, Logindata,PublicBlog } from './state'
 
-export   const Countryreducer=(state = countrydata, action)=>{
+export const Countryreducer = (state = countrydata, action) => {
   switch (action.type) {
     case FETCH_COUNTRY_BEGIN:
       return {
@@ -18,7 +20,7 @@ export   const Countryreducer=(state = countrydata, action)=>{
         ...state,
         loading: false,
         country: action.payload,
-        error:""
+        error: ""
       };
 
     case FETCH_COUNTRY_FAILURE:
@@ -34,9 +36,7 @@ export   const Countryreducer=(state = countrydata, action)=>{
   }
 }
 
-
-export   const Statereducer=(state = statedata, action)=>{
-  console.log(action.payload);
+export const Statereducer = (state = statedata, action) => {
   switch (action.type) {
     case FETCH_STATE_BEGIN:
       return {
@@ -66,8 +66,8 @@ export   const Statereducer=(state = statedata, action)=>{
 
 //---------------------------------Signup-------------------------------//
 
-export   const SignUPreducer=(state = Signupdata, action)=>{
-  console.log("payload",action.payload);
+export const SignUPreducer = (state = Signupdata, action) => {
+  console.log("payload", action.payload);
   switch (action.type) {
     case FETCH_SIGNUP_BEGIN:
       return {
@@ -75,12 +75,12 @@ export   const SignUPreducer=(state = Signupdata, action)=>{
         loading: true,
       };
 
-    case FETCH_LOGIN_FAILURE:
+    case FETCH_SIGNUP_FAILURE:
       return {
         ...state,
         loading: false,
         SignupResponce: [],
-        error: action.payload,
+        errordata: action.payload,
       };
 
     case FETCH_SIGNUP_SUCCESS:
@@ -95,7 +95,7 @@ export   const SignUPreducer=(state = Signupdata, action)=>{
   }
 }
 //----------------------------Login---------------------------------------------//
-export   const Loginreducer=(state = Logindata, action)=>{
+export const Loginreducer = (state = Logindata, action) => {
   switch (action.type) {
     case FETCH_LOGIN_BEGIN:
       return {
@@ -117,6 +117,36 @@ export   const Loginreducer=(state = Logindata, action)=>{
         loading: false,
         // LoginToken:action,
         Login: action.payload,
+      };
+
+    default:
+      return state;
+  }
+}
+//----------------------------PublicBlog---------------------------------------------//
+
+export const PublicBlogReducer = (state = PublicBlog, action) => {
+  switch (action.type) {
+    case FETCH_BLOG_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case FETCH_BLOG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        Blog: action.payload,
+        error: ""
+      };
+
+    case FETCH_BLOG_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        Blog: [],
       };
 
     default:

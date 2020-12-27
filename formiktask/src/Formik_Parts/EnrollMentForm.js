@@ -50,7 +50,7 @@ const validateSkills = values => {
   };
 
   const onSubmit = (values) => {
-    console.log('submit', values);
+    // console.log('submit', values);
   };
   return (
     <Formik

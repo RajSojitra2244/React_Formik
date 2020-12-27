@@ -8,7 +8,7 @@ const initialValues={
   psd:""
 },
  onSubmit =(values) => {
-  console.log('Form data', values);
+  // console.log('Form data', values);
 },
 //  validate=values=>{
 //   let errors={}

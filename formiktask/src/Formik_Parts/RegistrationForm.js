@@ -5,12 +5,13 @@ import * as Yup from 'yup'
 import {Card,Button} from 'react-bootstrap'
 import '../css/Registration.css'
 import { useHistory,Link } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 import { ToastContainer, toast } from 'react-toastify';
 import SuccessfullRegistration from '../IMG/successfull.png'
-import Header from '../public_header/header'
+import Header from '../public_part/header'
 import {useDispatch,useSelector} from 'react-redux'
-import {BaseUrl} from '../API/BaseAPI'
-import { getcountry, getCity,SendingSignUpRequest } from '../Redux/Action'
+import { getcountry, getState,SendingSignUpRequest } from '../Redux/Action'
+import backbutton from '../IMG/back-button.png'
 import TextError from './TextError'
  const deopdownoption = [
     { key: 'Select Course', value: '' },
@@ -27,12 +28,20 @@ function RegistrationForm() {
     let  dispatch = useDispatch()
  const [FormNumber, setFormNumber] = useState(1)
  const [Password, setPassword] = useState()
+ const [CaptchaToken, setCaptchaToken] = useState(null)
+ const [Captcha, setCaptcha] = useState(false)
+
  const [Registration, setRegistration] = useState(false)
 const CountryArray = useSelector(state => state.country.country)
 const CityArraySecond = useSelector(state => state.state.stateData)
+
+const EmailStatus = useSelector(state => state.signup.Signupdata)
+console.log("EmailStatus",EmailStatus);
+
  useEffect(() => { 
          dispatch(getcountry())
 },[])
+
 const history = useHistory()
    
   const   initialValues={
@@ -60,8 +69,7 @@ const history = useHistory()
     let error
      if( values.length ==0){
         error = "Required!"
-    }
-   
+      }
     return error
 }
 const validateCourse = values => {
@@ -78,7 +86,7 @@ const validatepassword = values => {
         errors = "Required!"
     }
     if(values.length != 6){  errors ="Enter minimum six digit"}
-    console.log("store",values.length);
+    // console.log("store",values.length);
     return errors
 }
 const validateconfimPassword = values => {
@@ -119,7 +127,7 @@ const validatecountry = values =>{
         errors = " Country is required!"
         }
         else{
-             dispatch(getCity(values))
+             dispatch(getState(values))
             }
     return errors
 }
@@ -128,16 +136,11 @@ const validatestate = values =>{
     if( values===''){
        errors = " State is required!"
        }
-       const checkvalues= Number.isInteger(values)
-       console.log("city",checkvalues);
-
    return errors
 }
 const previousForm = ()=>{
-    // debugger
-    if(FormNumber >1){
-        setFormNumber(FormNumber-1)
-    }
+    if(FormNumber >1){ setFormNumber(FormNumber-1) }
+    setCaptchaToken(null)
 }
 
  const  onSubmit=values=>{
@@ -145,20 +148,22 @@ const previousForm = ()=>{
        if(values){
            setFormNumber(FormNumber +1)
         }
-       {!initialValues.password == null && setFormNumber(FormNumber + 1)} 
+       {!initialValues.password == '' && setFormNumber(FormNumber + 1)} 
    }
      if(FormNumber ==4){
         if(values){
-            setRegistration(true)
-            dispatch(SendingSignUpRequest(values))
+            setCaptcha(true)
+            if(CaptchaToken){ 
+                setRegistration(true)
+                dispatch(SendingSignUpRequest(values))
+            }
         }
     }
-    console.log("AllData",values);
 }
-// {Registration==true && 
-//     toast.success("Registration Successfull")
-// }
-
+function onChange(value) {
+    if(value){setCaptchaToken(value)}
+    console.log("Captcha value:", value);
+  }
  const BackTologin=()=>{
     history.push('/login')
  }
@@ -209,7 +214,6 @@ const previousForm = ()=>{
             data-placement="top" 
             title="Personal Data"><i className="fa fa-pencil" style={FormNumber==3?firsttext:null}  aria-hidden="true">3</i></a>
         </div>
-
         <div className="steps-step-2 thired">
             <a href="#step-3" 
             type="button" 
@@ -236,8 +240,13 @@ const previousForm = ()=>{
   <Card.Body>
        { Registration ==false? <Card.Title className="cardtitle">Create Youre Account </Card.Title>
          :<Card.Title className="cardtitle" style={{color:"green"}}> Registrations Successfull</Card.Title>}
-
-            {Registration ==false&& <p><b>This is Step {FormNumber}</b></p> }
+        <div className="row">
+            <div className="col-8" style={{paddingLeft:"30%"}}>
+            {Registration ==false&& <p><b>This is Step {FormNumber}</b></p> }</div>
+            <div className="col-4">
+            { FormNumber >1 && FormNumber <=4 && Registration==false&&
+        <img src={backbutton} onClick={()=>{previousForm()}}  className="backimg"></img>
+        }</div></div>
     <Card.Body>
                 {FormNumber ==1 &&  
                 <>
@@ -311,13 +320,9 @@ const previousForm = ()=>{
                     type='text'
                     lable='Pincode*'
                     name='pinCode'
-                  validate={validatepincode} />
-
-                 
-                   
-                    </>
+                  validate={validatepincode} /> </>
                      }
-                      {FormNumber ==4 && Registration==false &&  
+                      {FormNumber ==4 && Captcha==false &&  
                 <>
                             
                            <FormikControl
@@ -328,24 +333,36 @@ const previousForm = ()=>{
                             validate={validatecountry}
                             options={CountryArray}
                             />
-
-                          { <FormikControl
+                            <FormikControl
                             control='city'
+                            type='text'
+                            lable='State*'
+                            name='state'
+                            validate={validatestate}
+                            options={CityArraySecond}
+                            />
+                           <FormikControl
+                            control='input'
                             type='text'
                             lable='City*'
                             name='city'
                             validate={validatecity}
-                            options={CityArraySecond}
-                            />}
-                    
-                 <FormikControl
-                    control='input'
-                    type='text'
-                    lable='State*'
-                    name='state'
-                  validate={validatestate} />
-                    </>
-                     }
+                            />
+                    </>}
+                    {Captcha && Registration==false && FormNumber==4&&
+                        <div>
+                            <div>
+                                <p>Please click in captcha square box and validate you are not robot.</p>
+                            </div>
+                        <div style={{marginLeft:"50px"}}>
+                            <ReCAPTCHA
+                            sitekey="6LeHLQsaAAAAABAc2BIBc5gnpnja6PrIzqGKnCJY"
+                            onChange={onChange}
+                            />
+                        </div>
+                        </div>
+                    }
+                     
                      {Registration?
                      <Card.Body>
                         <img src={SuccessfullRegistration} className="successimg"/> 
@@ -353,27 +370,22 @@ const previousForm = ()=>{
                     }
                
     </Card.Body>
-        <div className="row">
-            <div className="col-6">
+        
+            
        {Registration==false ? <button 
         type="submit" 
         className="btn btn-primary nextbutton" 
-        onClick={()=>{onSubmit()}}>{FormNumber==4? "Register":"Next"}</button>
+        disabled={FormNumber ==4 && Captcha && CaptchaToken == null}
+        onClick={()=>{onSubmit()}}>{FormNumber==4? "SignUp":"Next"}</button>
         :
         <Link 
         to="/login"
         type="submit" 
         className="btn btn-success nextbutton" 
-        onClick={()=>{BackTologin()}}>Back to Login</Link>
+        onClick={()=>{BackTologin()}}> Login</Link>
        }
-        </div>
-        <div className="col-6">
-        { FormNumber ==2 &&    <button 
-        type="submit" 
-        className="btn btn-primary " 
-        onClick={()=>{previousForm()}}>Previous</button>}
-        </div>
-        </div>
+        
+    
   </Card.Body>
 </Card>            
 </div>

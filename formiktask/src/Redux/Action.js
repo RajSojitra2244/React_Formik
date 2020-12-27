@@ -35,8 +35,8 @@ export const getcountry = () => {
       });
   };
 };
-// -----------------------------------------City-------------------------
-export const FETCH_STATE_BEGIN = 'FETCH_STATE_Signup';
+// -----------------------------------------State-------------------------
+export const FETCH_STATE_BEGIN = 'FETCH_STATE_BEGIN';
 export const FETCH_STATE_SUCCESS = 'FETCH_STATE_SUCCESS';
 export const FETCH_STATE_FAILURE = 'FETCH_STATE_FAILURE';
 
@@ -54,14 +54,14 @@ export const fetchStateFailure = (error) => ({
   payload: error,
 });
 
-export const getCity = (city) => {
+export const getState = (stateId) => {
   return (dispatch) => {
     dispatch(fetchStateBegin());
     axios
-      .get(`${process.env.REACT_APP_API}/api/getStateById/${city}`)
+      .get(`${process.env.REACT_APP_API}/api/getStateById/${stateId}`)
       .then((Response) => {
         const country = Response.data.stateList;
-        console.log(country);
+        // console.log(country);
         dispatch(fetchStateSuccess(country));
       })
       .catch((error) => {
@@ -99,11 +99,13 @@ export const SendingSignUpRequest = (data) => {
       .then((Response) => {
         if(Response.data.ResponseStatus !== 0){
           toast.error(Response.data.message)
+          dispatch(fetchSignupFailure(Response.data));
+          console.log("Signup",Response);
         }
           if(Response.data.ResponseStatus == 0){ 
             dispatch(fetchSignupSuccess(data)) 
             toast.success(Response.data.message)
-            console.log("Signup",Response.data.message);
+            console.log("Signup",Response.data);
             ;}
       })
       .catch((error) => {
@@ -134,13 +136,13 @@ export const fetchLoginFailure = (error) => ({
 });
 
 export const SendingLoginRequest = (data,props) => {
-  console.log("data",data);
+  // console.log("data",data);
   return (dispatch) => {
     dispatch(fetchLoginBegin());
     axios
       .post(`${process.env.REACT_APP_API}/api/login`,data)
       .then((Response) => {
-        console.log("Login",Response);
+        // console.log("Login",Response);
         const data = Response.data
 
         if(Response.data.ResponseStatus !== 0){

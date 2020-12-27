@@ -15,7 +15,7 @@ const initialValues={
   phonenumber:['','']
 },
  onSubmit =(values,onSubmitProps) => {
-  console.log('Form data', values);
+  // console.log('Form data', values);
   onSubmitProps.resetForm();
 },
 
