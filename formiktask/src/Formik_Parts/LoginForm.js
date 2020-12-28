@@ -18,12 +18,8 @@ function LoginForm(props) {
   const initialValues = {
     email: "",
     password: "",
-
   },
     onSubmit = (values, onSubmitProps) => {
-      // console.log('Form data', values);
-      // onSubmitProps.resetForm();
-      // history.push('/dash')
       dispatch(SendingLoginRequest(values, props))
     }
 

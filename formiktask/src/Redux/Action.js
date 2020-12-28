@@ -106,7 +106,6 @@ export const SendingSignUpRequest = (data) => {
         }
           if(Response.data.ResponseStatus == 0){ 
             dispatch(fetchSignupSuccess(Response.data)) 
-            toast.success(Response.data.message)
             console.log("Signup",Response.data);
             ;}
       })

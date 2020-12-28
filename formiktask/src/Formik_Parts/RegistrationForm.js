@@ -44,7 +44,11 @@ console.log("EmailStatusSuccess",EmailStatusSuccess);
  
 const history = useHistory()
     {EmailStatusSuccess.ResponseStatus=== 0 && 
-        history.push('/login')
+        setTimeout(()=>{
+            history.push('/login')
+        },2000)
+        toast.success(EmailStatusSuccess.message)
+
         // setRegistration(true)
     }   
 

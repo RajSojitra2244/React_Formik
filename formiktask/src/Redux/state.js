@@ -24,3 +24,9 @@ export const PublicBlog = {
     loading: false,
     error: null
 }
+
+export const ContactUs = {
+    ContactUsDetails: [],
+    loading: false,
+    error: null
+}
