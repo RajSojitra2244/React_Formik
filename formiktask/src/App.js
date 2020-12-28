@@ -16,6 +16,8 @@ function App() {
     <div>
   <Provider store={store}>
      <Router/>
+    <ToastContainer/>
+
   </Provider>
     </div>
    

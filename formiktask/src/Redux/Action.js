@@ -94,6 +94,8 @@ export const SendingSignUpRequest = (data) => {
   console.log("data",data);
   return (dispatch) => {
     dispatch(fetchSignupBegin());
+    dispatch(fetchSignupBegin());
+
     axios
       .post(`${process.env.REACT_APP_API}/api/signin`,data)
       .then((Response) => {
@@ -103,7 +105,7 @@ export const SendingSignUpRequest = (data) => {
           console.log("Signup",Response);
         }
           if(Response.data.ResponseStatus == 0){ 
-            dispatch(fetchSignupSuccess(data)) 
+            dispatch(fetchSignupSuccess(Response.data)) 
             toast.success(Response.data.message)
             console.log("Signup",Response.data);
             ;}

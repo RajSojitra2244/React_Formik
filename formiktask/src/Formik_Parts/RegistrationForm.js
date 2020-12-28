@@ -12,7 +12,6 @@ import Header from '../public_part/header'
 import {useDispatch,useSelector} from 'react-redux'
 import { getcountry, getState,SendingSignUpRequest } from '../Redux/Action'
 import backbutton from '../IMG/back-button.png'
-import TextError from './TextError'
  const deopdownoption = [
     { key: 'Select Course', value: '' },
     { key: 'React', value: 'React' },
@@ -24,7 +23,7 @@ import TextError from './TextError'
     { key: 'Css', value: 'Css' },
     { key: 'JavaScript', value: 'JavaScript' },
 ];
-function RegistrationForm() {
+function RegistrationForm(props) {
     let  dispatch = useDispatch()
  const [FormNumber, setFormNumber] = useState(1)
  const [Password, setPassword] = useState()
@@ -34,16 +33,22 @@ function RegistrationForm() {
  const [Registration, setRegistration] = useState(false)
 const CountryArray = useSelector(state => state.country.country)
 const CityArraySecond = useSelector(state => state.state.stateData)
-
-const EmailStatus = useSelector(state => state.signup.Signupdata)
-console.log("EmailStatus",EmailStatus);
+let EmailStatusError = useSelector(state => state.signup)
+let EmailStatusSuccess = useSelector(state => state.signup.SignupResponce)
+console.log("EmailStatusSuccess",EmailStatusSuccess);
+// console.log("EmailStatusError",EmailStatusError);
 
  useEffect(() => { 
          dispatch(getcountry())
 },[])
-
+ 
 const history = useHistory()
-   
+    {EmailStatusSuccess.ResponseStatus=== 0 && 
+        history.push('/login')
+        // setRegistration(true)
+    }   
+
+
   const   initialValues={
         name:"",
         email:'',
@@ -59,7 +64,6 @@ const history = useHistory()
         state:'',
         
     }
-
   const validationSchema= Yup.object(
             initialValues.name==''&&{
             name:Yup.string().required('Required!'),
@@ -144,6 +148,7 @@ const previousForm = ()=>{
 }
 
  const  onSubmit=values=>{
+ 
    if(FormNumber < 4){
        if(values){
            setFormNumber(FormNumber +1)
@@ -151,18 +156,40 @@ const previousForm = ()=>{
        {!initialValues.password == '' && setFormNumber(FormNumber + 1)} 
    }
      if(FormNumber ==4){
+         console.log("values",values);
         if(values){
             setCaptcha(true)
             if(CaptchaToken){ 
-                setRegistration(true)
                 dispatch(SendingSignUpRequest(values))
+
+                // setTimeout(()=>{
+                    console.log(EmailStatusSuccess.ResponseStatus==0);
+                    // console.log(EmailStatusError );
+                    if(EmailStatusSuccess.ResponseStatus == 0){
+                        setRegistration(true)
+                        console.log("successful;-----------------signup");
+                    }
+                    // if(EmailStatusSuccess.errordata.message){ 
+                    //     console.log("error33333333333333333333333")
+                    //     setFormNumber(1)
+                    // }
+                // },2000)
+               
             }
         }
     }
 }
+
+
 function onChange(value) {
     if(value){setCaptchaToken(value)}
     console.log("Captcha value:", value);
+    EmailStatusError=[]
+    EmailStatusSuccess=[]
+    console.log("EmailStatusError",EmailStatusError)
+    console.log("EmailStatusSuccess",EmailStatusSuccess)
+
+
   }
  const BackTologin=()=>{
     history.push('/login')
@@ -225,7 +252,7 @@ function onChange(value) {
             data-placement="top" 
             title="Terms and Conditions"><i className="fa fa-photo" style={ Registration?null:FormNumber==4?firsttext:null}  aria-hidden="true">4</i></a>
         </div>
-        <div className="steps-step-2">
+        {/* <div className="steps-step-2">
             <a href="#step-4" 
             type="button" 
             style={Registration?first:null}
@@ -233,7 +260,7 @@ function onChange(value) {
             data-toggle="tooltip" 
             data-placement="top" 
             title="Finish"><i className="fa fa-check"  style={Registration?firsttext:null} aria-hidden="true"></i></a>
-        </div>
+        </div> */}
     </div>
 </div>
  <Card className="card">

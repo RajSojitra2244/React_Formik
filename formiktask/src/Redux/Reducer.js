@@ -73,6 +73,9 @@ export const SignUPreducer = (state = Signupdata, action) => {
       return {
         ...state,
         loading: true,
+        errordata: [],
+        SignupResponce: [],
+
       };
 
     case FETCH_SIGNUP_FAILURE:
@@ -88,6 +91,8 @@ export const SignUPreducer = (state = Signupdata, action) => {
         ...state,
         loading: false,
         SignupResponce: action.payload,
+        errordata: []
+
       };
 
     default:
