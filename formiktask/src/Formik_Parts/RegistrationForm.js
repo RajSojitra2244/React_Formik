@@ -29,25 +29,24 @@ function RegistrationForm(props) {
  const [Password, setPassword] = useState()
  const [CaptchaToken, setCaptchaToken] = useState(null)
  const [Captcha, setCaptcha] = useState(false)
-
  const [Registration, setRegistration] = useState(false)
+
 const CountryArray = useSelector(state => state.country.country)
 const CityArraySecond = useSelector(state => state.state.stateData)
 let EmailStatusError = useSelector(state => state.signup)
 let EmailStatusSuccess = useSelector(state => state.signup.SignupResponce)
 console.log("EmailStatusSuccess",EmailStatusSuccess);
-// console.log("EmailStatusError",EmailStatusError);
-
  useEffect(() => { 
          dispatch(getcountry())
 },[])
  
 const history = useHistory()
     {EmailStatusSuccess.ResponseStatus=== 0 && 
-        history.push('/login')
-        // setRegistration(true)
-    }   
-
+        setTimeout(()=>{
+            history.push('/login')
+        },2000)
+        toast.success(EmailStatusSuccess.message)
+    }  
 
   const   initialValues={
         name:"",
@@ -148,7 +147,7 @@ const previousForm = ()=>{
 }
 
  const  onSubmit=values=>{
- console.log(values);
+ 
    if(FormNumber < 4){
        if(values){
            setFormNumber(FormNumber +1)
@@ -170,13 +169,10 @@ const previousForm = ()=>{
         }
     }
 }
+
+
 function onChange(value) {
     if(value){setCaptchaToken(value)}
-    console.log("Captcha value:", value);
-    EmailStatusError=[]
-    EmailStatusSuccess=[]
-    console.log("EmailStatusError",EmailStatusError)
-    console.log("EmailStatusSuccess",EmailStatusSuccess)
   }
  const BackTologin=()=>{
     history.push('/login')

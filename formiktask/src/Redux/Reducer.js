@@ -67,7 +67,6 @@ export const Statereducer = (state = statedata, action) => {
 //---------------------------------Signup-------------------------------//
 
 export const SignUPreducer = (state = Signupdata, action) => {
-  console.log("payload", action.payload);
   switch (action.type) {
     case FETCH_SIGNUP_BEGIN:
       return {

@@ -18,12 +18,8 @@ function LoginForm(props) {
   const initialValues = {
     email: "",
     password: "",
-
   },
     onSubmit = (values, onSubmitProps) => {
-      // console.log('Form data', values);
-      // onSubmitProps.resetForm();
-      // history.push('/dash')
       dispatch(SendingLoginRequest(values, props))
     }
 
@@ -65,6 +61,13 @@ function LoginForm(props) {
                       lable='Password'
                       name='password'
                     />
+                  <div className="row">
+                      <div className="col-6">
+                        <Link to='/forgotpassword'><u>Forgot Password!</u></Link>
+                      </div>
+                    </div>
+
+
                     <div className="row">
                       <div className="col-6">
                         <button type="submit" className="btn btn-success Lbutton " disabled={!formik.isValid}>Login</button>
