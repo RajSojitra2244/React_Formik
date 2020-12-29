@@ -30,3 +30,13 @@ export const ContactUs = {
     loading: false,
     error: null
 }
+export const ForgotPassword = {
+    data: [],
+    loading: false,
+    error: null
+}
+export const SetPassword = {
+    data: [],
+    loading: false,
+    error: null
+}

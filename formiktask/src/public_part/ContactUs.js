@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../css/contactus.css'
 import Header from './header'
 import GoogleMapReact from 'google-map-react';
+import Marker from 'google-map-react'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
@@ -34,8 +35,6 @@ function ContactUs() {
   .required('A phone number is required'),
 
       })
-    
-
 const[data,setdata]=useState(
     {
         center: {lat:21.219686, lng:72.898042},
@@ -54,7 +53,7 @@ const[data,setdata]=useState(
         >
           {formik => {
             return (<Form>
-              <Card className="card">
+              <Card className="card margintop">
                 <div className="row">
                 <div className="col-6">
                   <img src={ContactUsImg}/>
@@ -107,14 +106,14 @@ const[data,setdata]=useState(
           }
         </Formik>
       </div>
-
-
-
         <div style={{height: '450px',width:"100%"}}>
         <GoogleMapReact
         defaultCenter={data.center}
         defaultZoom={data.zoom} >
         </GoogleMapReact>
+        <Marker position={{lat:21.219686, lng:72.898042}}>
+
+        </Marker>
         </div>
 
         </div>

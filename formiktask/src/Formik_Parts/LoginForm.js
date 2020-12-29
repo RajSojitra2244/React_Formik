@@ -61,14 +61,16 @@ function LoginForm(props) {
                       lable='Password'
                       name='password'
                     />
-                  <div className="row">
-                      <div className="col-6">
+                  <div className="row ">
+                  <div className="col-6">
+                  </div>
+                      <div className="col-6" style={{marginLeft:"62%"}}>
                         <Link to='/forgotpassword'><u>Forgot Password!</u></Link>
                       </div>
                     </div>
 
 
-                    <div className="row">
+                    <div className="row mt-3 ">
                       <div className="col-6">
                         <button type="submit" className="btn btn-success Lbutton " disabled={!formik.isValid}>Login</button>
                       </div>

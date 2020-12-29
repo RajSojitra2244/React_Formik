@@ -66,13 +66,21 @@ const history = useHistory()
   const validationSchema= Yup.object(
             initialValues.name==''&&{
             name:Yup.string().required('Required!'),
-            phoneNo: Yup.number().typeError('Only Number Allowed').required('PhoneNo Required*'),
+            // phoneNo: Yup.number().typeError('Only Number Allowed').min(10).max(10).required('PhoneNo Required*'),
             email:Yup.string().email('Invalid Email format').required('Required!') }   )
  const validateSkills = values => {
     let error
      if( values.length ==0){
         error = "Required!"
       }
+    return error
+}
+const validatePassword = values => {
+    let error
+    let phoneno = /^\d{10}$/
+     if(values.match(phoneno)){
+        error = ""
+      }else{ error="Enter valid Number!!"}
     return error
 }
 const validateCourse = values => {
@@ -88,8 +96,7 @@ const validatepassword = values => {
     if( values===''){
         errors = "Required!"
     }
-    if(values.length != 6){  errors ="Enter minimum six digit"}
-    // console.log("store",values.length);
+    if(values.length < 6){  errors ="Enter minimum six digit"}
     return errors
 }
 const validateconfimPassword = values => {
@@ -101,8 +108,7 @@ const validateconfimPassword = values => {
         if(values !== Password){ 
           errors = "Password does't match!"
           return errors
-          }
-  
+          } 
 }
 const validatepincode = values => {
     let errors
@@ -155,7 +161,6 @@ const previousForm = ()=>{
        {!initialValues.password == '' && setFormNumber(FormNumber + 1)} 
    }
      if(FormNumber ==4){
-         console.log("values",values);
         if(values){
             setCaptcha(true)
             if(CaptchaToken){ 
@@ -163,7 +168,6 @@ const previousForm = ()=>{
                     console.log(EmailStatusSuccess.ResponseStatus==0);
                     if(EmailStatusSuccess.ResponseStatus == 0){
                         setRegistration(true)
-                        console.log("successful;-----------------signup");
                     }
             }
         }
@@ -276,7 +280,7 @@ function onChange(value) {
                     control='input'
                     type='text'
                     lable='Phone no*'
-                    min="0"
+                    validate={validatePassword}
                     name='phoneNo'
                     />
                 
