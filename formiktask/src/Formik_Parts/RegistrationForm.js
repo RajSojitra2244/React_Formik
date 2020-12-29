@@ -29,15 +29,13 @@ function RegistrationForm(props) {
  const [Password, setPassword] = useState()
  const [CaptchaToken, setCaptchaToken] = useState(null)
  const [Captcha, setCaptcha] = useState(false)
-
  const [Registration, setRegistration] = useState(false)
+
 const CountryArray = useSelector(state => state.country.country)
 const CityArraySecond = useSelector(state => state.state.stateData)
 let EmailStatusError = useSelector(state => state.signup)
 let EmailStatusSuccess = useSelector(state => state.signup.SignupResponce)
 console.log("EmailStatusSuccess",EmailStatusSuccess);
-// console.log("EmailStatusError",EmailStatusError);
-
  useEffect(() => { 
          dispatch(getcountry())
 },[])
@@ -48,10 +46,7 @@ const history = useHistory()
             history.push('/login')
         },2000)
         toast.success(EmailStatusSuccess.message)
-
-        // setRegistration(true)
-    }   
-
+    }  
 
   const   initialValues={
         name:"",
@@ -165,20 +160,11 @@ const previousForm = ()=>{
             setCaptcha(true)
             if(CaptchaToken){ 
                 dispatch(SendingSignUpRequest(values))
-
-                // setTimeout(()=>{
                     console.log(EmailStatusSuccess.ResponseStatus==0);
-                    // console.log(EmailStatusError );
                     if(EmailStatusSuccess.ResponseStatus == 0){
                         setRegistration(true)
                         console.log("successful;-----------------signup");
                     }
-                    // if(EmailStatusSuccess.errordata.message){ 
-                    //     console.log("error33333333333333333333333")
-                    //     setFormNumber(1)
-                    // }
-                // },2000)
-               
             }
         }
     }
@@ -187,13 +173,6 @@ const previousForm = ()=>{
 
 function onChange(value) {
     if(value){setCaptchaToken(value)}
-    console.log("Captcha value:", value);
-    EmailStatusError=[]
-    EmailStatusSuccess=[]
-    console.log("EmailStatusError",EmailStatusError)
-    console.log("EmailStatusSuccess",EmailStatusSuccess)
-
-
   }
  const BackTologin=()=>{
     history.push('/login')
@@ -201,7 +180,6 @@ function onChange(value) {
     return (
         <div>
             <Header/>
-
         <div className="registration">
        <Formik
        initialValues={initialValues}

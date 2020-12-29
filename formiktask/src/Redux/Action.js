@@ -137,27 +137,25 @@ export const fetchLoginFailure = (error) => ({
 });
 
 export const SendingLoginRequest = (data,props) => {
-  // console.log("data",data);
   return (dispatch) => {
     dispatch(fetchLoginBegin());
     axios
       .post(`${process.env.REACT_APP_API}/api/login`,data)
       .then((Response) => {
-        // console.log("Login",Response);
         const data = Response.data
-
         if(Response.data.ResponseStatus !== 0){
           localStorage.removeItem('logintoken')
           toast.error(Response.data.message)
         }
           if(Response.data.ResponseStatus == 0){ 
             dispatch(fetchLoginSuccess(data)) 
-            toast.success(Response.data.message)
+            setTimeout(()=>{
               Auth.login(() => {
-                toast.success(" Login Successfull !!")
                 localStorage.setItem('logintoken', data.token)
                 props.history.push("/dash")
             })
+            },2000)
+            toast.success(Response.data.message)
             }
       })
       .catch((error) => {
