@@ -12,7 +12,7 @@ function Country(props) {
                            options && options.map((option)=>{
                                 return(
                                     <option key={option.Id} value={option.Id}>{option.CountryName}</option>
-                                )
+                                   )
                             })
                         }
                     </Field>

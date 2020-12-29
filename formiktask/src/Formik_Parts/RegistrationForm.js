@@ -148,7 +148,7 @@ const previousForm = ()=>{
 }
 
  const  onSubmit=values=>{
- 
+ console.log(values);
    if(FormNumber < 4){
        if(values){
            setFormNumber(FormNumber +1)
@@ -161,26 +161,15 @@ const previousForm = ()=>{
             setCaptcha(true)
             if(CaptchaToken){ 
                 dispatch(SendingSignUpRequest(values))
-
-                // setTimeout(()=>{
                     console.log(EmailStatusSuccess.ResponseStatus==0);
-                    // console.log(EmailStatusError );
                     if(EmailStatusSuccess.ResponseStatus == 0){
                         setRegistration(true)
                         console.log("successful;-----------------signup");
                     }
-                    // if(EmailStatusSuccess.errordata.message){ 
-                    //     console.log("error33333333333333333333333")
-                    //     setFormNumber(1)
-                    // }
-                // },2000)
-               
             }
         }
     }
 }
-
-
 function onChange(value) {
     if(value){setCaptchaToken(value)}
     console.log("Captcha value:", value);
@@ -188,8 +177,6 @@ function onChange(value) {
     EmailStatusSuccess=[]
     console.log("EmailStatusError",EmailStatusError)
     console.log("EmailStatusSuccess",EmailStatusSuccess)
-
-
   }
  const BackTologin=()=>{
     history.push('/login')
@@ -197,7 +184,6 @@ function onChange(value) {
     return (
         <div>
             <Header/>
-
         <div className="registration">
        <Formik
        initialValues={initialValues}

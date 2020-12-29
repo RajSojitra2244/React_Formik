@@ -18,18 +18,9 @@ const[data,setdata]=useState(
             <div>
             <Card>
   <Card.Img variant="top" src="holder.js/100px180" />
-  <Card.Body>
-    <Card.Title>Countact Us</Card.Title>
-        <Card.Body>
-            
-        </Card.Body>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
+
 </Card>
             </div>
-
-
-
         <div style={{height: '450px',width:"100%"}}>
         <GoogleMapReact
         defaultCenter={data.center}
