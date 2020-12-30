@@ -8,8 +8,16 @@ import { useDispatch } from 'react-redux'
 import ForgotPsd from '../IMG/forgotpsd.jpg'
 import '../css/Forgotpsd.css'
 import{ForgotPasswordRequest}from '../Redux/ForgotPassword/ForgotPasswordActioin'
+import {isAuthenticated}from '../PrivateRouter/auth'
+import { useHistory } from "react-router-dom";
+
 function ForgotPassword() {
     let dispatch = useDispatch()
+  const history = useHistory()
+
+    if (isAuthenticated() !== false) {
+      history.push("/")
+  }
   
     const initialValues = {
       email: "",
@@ -28,7 +36,6 @@ function ForgotPassword() {
     return (
         <div>
              <div >
-            <Header />
       <div className="contactus forgotpsdMain">
         <Formik
           initialValues={initialValues}

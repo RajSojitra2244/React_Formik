@@ -1,20 +1,8 @@
-class Auth{
-    constructor(){
-        this.authenticated = false;
+export const isAuthenticated = () => {
+    if (localStorage.getItem('logintoken')) {
+        return localStorage.getItem("logintoken")
     }
-login(cb){
-    this.authenticated =true;
-    cb();
+    else {
+        return false
+    }
 }
-
-logout(cb){
-    this.authenticated =false;
-    cb()
-}
-
-isAuthenticated(){
-    return   this.authenticated;
-
-}
-}
-export default new Auth();

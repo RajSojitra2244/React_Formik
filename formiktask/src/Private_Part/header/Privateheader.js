@@ -4,7 +4,7 @@ import { Layout, Menu, Card } from 'antd';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData'
-
+import 'antd/dist/antd.css';
 const { Sider } = Layout;
 
 export const Privateheader = ({ children }) => {
@@ -14,6 +14,7 @@ export const Privateheader = ({ children }) => {
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
+            
             <Sider collapsible collapsed={state} onCollapse={() => { onCollapse() }}>
                 <div className="logo" />
 
@@ -33,9 +34,7 @@ export const Privateheader = ({ children }) => {
                     }
                 </Menu>
             </Sider>
-                    
-            
-            <Layout>
+  <Layout>
                 <Navbar bg="light" >
                     <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -57,8 +56,8 @@ export const Privateheader = ({ children }) => {
                         </Form>
                     </Navbar.Collapse>
                 </Navbar>
-                    {children}
             </Layout>
+                    {children}
         </Layout>
     );
 }

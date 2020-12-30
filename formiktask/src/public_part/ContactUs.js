@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../css/contactus.css'
 import Header from './header'
+import { useHistory } from "react-router-dom";
 import GoogleMapReact from 'google-map-react';
 import Marker from 'google-map-react'
 import { Form, Formik } from 'formik'
@@ -10,9 +11,15 @@ import { Card, Button, } from 'react-bootstrap'
 import FormikControll from '../Formik_Parts/FormikControll'
 import ContactUsImg from '../IMG/co.png'
 import{SendContactUsRequest}from '../Redux/ContactUs/ContactUsAction'
+import {isAuthenticated}from '../PrivateRouter/auth'
 
 function ContactUs() {
     let dispatch = useDispatch()
+  const history = useHistory()
+
+    if (isAuthenticated() !== false) {
+      history.push("/")
+  }
   
     const initialValues = {
       email: "",
@@ -44,7 +51,6 @@ const[data,setdata]=useState(
 
     return (
         <div >
-            <Header />
       <div className="contactus">
         <Formik
           initialValues={initialValues}
@@ -106,7 +112,7 @@ const[data,setdata]=useState(
           }
         </Formik>
       </div>
-        <div style={{height: 'a00px',width:"100%"}}>
+        <div style={{height: '450px',width:"100%"}}>
         <GoogleMapReact
         defaultCenter={data.center}
         defaultZoom={data.zoom} >

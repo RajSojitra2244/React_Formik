@@ -2,7 +2,7 @@ import {
   FETCH_COUNTRY_BEGIN, FETCH_COUNTRY_SUCCESS, FETCH_COUNTRY_FAILURE,
   FETCH_STATE_BEGIN, FETCH_STATE_FAILURE, FETCH_STATE_SUCCESS,
   FETCH_SIGNUP_BEGIN, FETCH_SIGNUP_FAILURE, FETCH_SIGNUP_SUCCESS,
-  FETCH_LOGIN_BEGIN, FETCH_LOGIN_FAILURE, FETCH_LOGIN_SUCCESS,
+  FETCH_LOGIN_BEGIN, FETCH_LOGIN_FAILURE, FETCH_LOGIN_SUCCESS,FETCH_SIGNUP_DEFAULT
 } from './Action';
 import { FETCH_BLOG_BEGIN, FETCH_BLOG_SUCCESS, FETCH_BLOG_FAILURE } from './Blog/BlogAction'
 import { countrydata, statedata, Signupdata, Logindata,PublicBlog } from './state'
@@ -63,10 +63,9 @@ export const Statereducer = (state = statedata, action) => {
       return state;
   }
 }
-
 //---------------------------------Signup-------------------------------//
-
 export const SignUPreducer = (state = Signupdata, action) => {
+  console.log("Signupdefault");
   switch (action.type) {
     case FETCH_SIGNUP_BEGIN:
       return {
@@ -74,7 +73,8 @@ export const SignUPreducer = (state = Signupdata, action) => {
         loading: true,
         errordata: [],
         SignupResponce: [],
-
+        signupfail:null,
+        signuptrue:null,
       };
 
     case FETCH_SIGNUP_FAILURE:
@@ -82,15 +82,27 @@ export const SignUPreducer = (state = Signupdata, action) => {
         ...state,
         loading: false,
         signupfail:true,
+        signuptrue:null,
         SignupResponce: [],
         errordata: action.payload,
       };
+      case FETCH_SIGNUP_DEFAULT:
+        return {
+          SignupResponce: [],
+          signupfail:null,
+          signuptrue:null,
+          loading: false,
+          errordata: []
+             };
 
     case FETCH_SIGNUP_SUCCESS:
       return {
         ...state,
         loading: false,
+        signuptrue:true,
         signupfail:null,
+
+
         SignupResponce: action.payload,
         errordata: []
 

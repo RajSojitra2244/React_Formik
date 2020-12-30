@@ -75,6 +75,12 @@ export const getState = (stateId) => {
 export const FETCH_SIGNUP_BEGIN = 'FETCH_SIGNUP_BEGIN';
 export const FETCH_SIGNUP_SUCCESS = 'FETCH_SIGNUP_SUCCESS';
 export const FETCH_SIGNUP_FAILURE = 'FETCH_SIGNUP_FAILURE';
+export const FETCH_SIGNUP_DEFAULT = 'FETCH_SIGNUP_DEFAULT';
+
+export const fetchSignupDefault = () => ({
+  type: FETCH_SIGNUP_DEFAULT,
+});
+
 
 export const fetchSignupBegin = () => ({
   type: FETCH_SIGNUP_BEGIN,
@@ -90,10 +96,9 @@ export const fetchSignupFailure = (error) => ({
   payload: error,
 });
 
-export const SendingSignUpRequest = (data) => {
+export const SendingSignUpRequest = (data,onSubmitProps) => {
   console.log("data",data);
   return (dispatch) => {
-    dispatch(fetchSignupBegin());
     dispatch(fetchSignupBegin());
 
     axios
@@ -106,6 +111,8 @@ export const SendingSignUpRequest = (data) => {
         }
           if(Response.data.ResponseStatus == 0){ 
             dispatch(fetchSignupSuccess(Response.data)) 
+           toast.success(Response.data.message)
+            onSubmitProps.resetForm()
             console.log("Signup",Response.data);
             ;}
       })
@@ -150,11 +157,9 @@ export const SendingLoginRequest = (data,props) => {
           if(Response.data.ResponseStatus == 0){ 
             dispatch(fetchLoginSuccess(data)) 
             setTimeout(()=>{
-              Auth.login(() => {
                 localStorage.setItem('logintoken', data.token)
                 props.history.push("/dash")
             })
-            },2000)
             toast.success(Response.data.message)
             }
       })

@@ -1,13 +1,18 @@
 import React from 'react';
 import {Navbar,Form,Button,NavDropdown,FormControl,Nav} from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
-
+import {isAuthenticated} from '../PrivateRouter/auth'
+import Privateheader from '../Private_Part/header/Privateheader'
 
 function Header() {
   return (
     <div>
 
+      {(isAuthenticated()) ? 
       
+      <Privateheader/>
+      :
+                  
 <Navbar collapseOnSelect  bg="dark" variant="dark">
   <Navbar.Brand href="/">Bloge</Navbar.Brand>
   {/* <Navbar.Toggle aria-controls="responsive-navbar-nav" /> */}
@@ -24,6 +29,11 @@ function Header() {
     </Nav>
   </Navbar.Collapse>
 </Navbar>
+            
+
+      
+      }
+
     </div>
   );
 }

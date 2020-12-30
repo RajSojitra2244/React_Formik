@@ -11,6 +11,7 @@ export const statedata = {
 export const Signupdata = {
     SignupResponce: [],
     signupfail:null,
+    signuptrue:null,
     loading: false,
     errordata: []
 }

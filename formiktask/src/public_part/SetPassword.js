@@ -7,8 +7,16 @@ import Header from './header'
 import { useDispatch } from 'react-redux'
 import '../css/SetPassword.css'
 import{SetPasswordRequest}from '../Redux/SetPassword/SetPasswordAction'
+import {isAuthenticated}from '../PrivateRouter/auth'
+import { useHistory } from "react-router-dom";
+
 function SetPassword() {
     let dispatch = useDispatch()
+  const history = useHistory()
+    if (isAuthenticated() !== false) {
+      history.push("/")
+  }
+  
 const [UrlToken, setUrlToken] = useState()
     useEffect(()=>{
         const UrlPath = window.location.pathname.split('/')
@@ -31,7 +39,6 @@ const [UrlToken, setUrlToken] = useState()
     return (
         <div>
              <div >
-            <Header />
       <div className="contactus centerShow">
         <Formik
           initialValues={initialValues}

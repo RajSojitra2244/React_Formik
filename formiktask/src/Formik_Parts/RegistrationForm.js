@@ -10,7 +10,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import SuccessfullRegistration from '../IMG/successfull.png'
 import Header from '../public_part/header'
 import {useDispatch,useSelector} from 'react-redux'
-import { getcountry, getState,SendingSignUpRequest } from '../Redux/Action'
+import {isAuthenticated}from '../PrivateRouter/auth'
+import { getcountry, getState,SendingSignUpRequest ,fetchSignupBegin} from '../Redux/Action'
 import backbutton from '../IMG/back-button.png'
  const deopdownoption = [
     { key: 'Select Course', value: '' },
@@ -25,11 +26,16 @@ import backbutton from '../IMG/back-button.png'
 ];
 function RegistrationForm(props) {
     let  dispatch = useDispatch()
+    if (isAuthenticated() !== false) {
+        history.push("/")
+    }
+    
  const [FormNumber, setFormNumber] = useState(1)
  const [Password, setPassword] = useState()
  const [CaptchaToken, setCaptchaToken] = useState(null)
  const [Captcha, setCaptcha] = useState(false)
  const [Registration, setRegistration] = useState(false)
+ const [success, setsuccess] = useState(null)
 
 const CountryArray = useSelector(state => state.country.country)
 const CityArraySecond = useSelector(state => state.state.stateData)
@@ -41,19 +47,19 @@ console.log("EmailStatusSuccess",EmailStatusError.signupfail);
 },[])
  
 const history = useHistory()
-    {EmailStatusSuccess.ResponseStatus=== 0 && 
+    {EmailStatusSuccess.ResponseStatus=== 0 
+        && FormNumber==4  && 
         setTimeout(()=>{
             history.push('/login')
         },2000)
-        toast.success(EmailStatusSuccess.message)
     } 
-    {EmailStatusError.signupfail == true && FormNumber==4 && Registration == false &&
+    {    EmailStatusError.signupfail == true   && FormNumber==4
+         &&  success==null&&
         setTimeout(()=>{
            setFormNumber(1)
+           setsuccess(false)
         },1000)
-        toast.error(EmailStatusSuccess.message)
     }  
- 
 
   const   initialValues={
         name:"",
@@ -159,8 +165,7 @@ const previousForm = ()=>{
     setCaptchaToken(null)
 }
 
- const  onSubmit=values=>{
-    EmailStatusError =[]
+ const  onSubmit=(values,onSubmitProps)=>{
    if(FormNumber < 4){
        if(values){
            setFormNumber(FormNumber +1)
@@ -171,7 +176,7 @@ const previousForm = ()=>{
         if(values){
             setCaptcha(true)
             if(CaptchaToken){ 
-                dispatch(SendingSignUpRequest(values))
+                dispatch(SendingSignUpRequest(values,onSubmitProps))
                     console.log(EmailStatusSuccess.ResponseStatus==0);
                     if(EmailStatusSuccess.ResponseStatus == 0){
                         setRegistration(true)
@@ -190,7 +195,6 @@ function onChange(value) {
  }
     return (
         <div>
-            <Header/>
         <div className="registration">
        <Formik
        initialValues={initialValues}

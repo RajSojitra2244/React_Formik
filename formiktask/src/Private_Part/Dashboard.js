@@ -4,7 +4,6 @@ import Privateheader from './header/Privateheader'
 function Dashboard() {
     return (
         <div>
-            <Privateheader/>
             <h1>Dashboard</h1>
         </div>
     )
