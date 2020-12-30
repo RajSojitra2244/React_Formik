@@ -81,6 +81,7 @@ export const SignUPreducer = (state = Signupdata, action) => {
       return {
         ...state,
         loading: false,
+        signupfail:true,
         SignupResponce: [],
         errordata: action.payload,
       };
@@ -89,6 +90,7 @@ export const SignUPreducer = (state = Signupdata, action) => {
       return {
         ...state,
         loading: false,
+        signupfail:null,
         SignupResponce: action.payload,
         errordata: []
 
