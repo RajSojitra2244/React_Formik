@@ -35,7 +35,7 @@ const CountryArray = useSelector(state => state.country.country)
 const CityArraySecond = useSelector(state => state.state.stateData)
 let EmailStatusError = useSelector(state => state.signup)
 let EmailStatusSuccess = useSelector(state => state.signup.SignupResponce)
-console.log("EmailStatusSuccess",EmailStatusSuccess);
+console.log("EmailStatusSuccess",EmailStatusError.signupfail);
  useEffect(() => { 
          dispatch(getcountry())
 },[])
@@ -46,7 +46,14 @@ const history = useHistory()
             history.push('/login')
         },2000)
         toast.success(EmailStatusSuccess.message)
+    } 
+    {EmailStatusError.signupfail == true && FormNumber==4 && Registration == false &&
+        setTimeout(()=>{
+           setFormNumber(1)
+        },1000)
+        toast.error(EmailStatusSuccess.message)
     }  
+ 
 
   const   initialValues={
         name:"",
@@ -153,7 +160,7 @@ const previousForm = ()=>{
 }
 
  const  onSubmit=values=>{
- 
+    EmailStatusError =[]
    if(FormNumber < 4){
        if(values){
            setFormNumber(FormNumber +1)

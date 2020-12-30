@@ -10,6 +10,7 @@ export const statedata = {
 }
 export const Signupdata = {
     SignupResponce: [],
+    signupfail:null,
     loading: false,
     errordata: []
 }

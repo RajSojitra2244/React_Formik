@@ -106,7 +106,7 @@ const[data,setdata]=useState(
           }
         </Formik>
       </div>
-        <div style={{height: '450px',width:"100%"}}>
+        <div style={{height: 'a00px',width:"100%"}}>
         <GoogleMapReact
         defaultCenter={data.center}
         defaultZoom={data.zoom} >
