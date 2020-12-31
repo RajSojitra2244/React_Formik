@@ -5,7 +5,7 @@ import RegistrationForm from '../Formik_Parts/RegistrationForm'
 import Header from '../public_part/header'
 import Home from '../public_part/Home'
 import { ToastContainer, toast } from 'react-toastify';
-import Dashboard from '../Private_Part/Dashboard'
+import Dashboard from '../Private_Part/header/RouterFile'
 import ProtectedRoute from '../PrivateRouter/ProtectedRoute'
 import CountctUs from '../public_part/ContactUs'
 import ForgotPassword from '../public_part/ForgotPassword'

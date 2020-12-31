@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< Updated upstream
 import Privateheader from '../header/Privateheader'
 
 function Home() {
@@ -8,6 +9,15 @@ function Home() {
                 
             </Privateheader>
         </div>
+=======
+import Privateheader from "../header/Privateheader"
+
+function Home() {
+    return (
+        <Privateheader title="Home">
+            Home123
+        </Privateheader>
+>>>>>>> Stashed changes
     )
 }
 
