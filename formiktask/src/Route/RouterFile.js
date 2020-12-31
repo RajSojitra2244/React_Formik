@@ -5,12 +5,16 @@ import RegistrationForm from '../Formik_Parts/RegistrationForm'
 import Header from '../public_part/header'
 import Home from '../public_part/Home'
 import { ToastContainer, toast } from 'react-toastify';
-import Dashboard from '../Private_Part/header/RouterFile'
+import Dashboard from '../Private_Part/Dashboard'
 import ProtectedRoute from '../PrivateRouter/ProtectedRoute'
 import CountctUs from '../public_part/ContactUs'
 import ForgotPassword from '../public_part/ForgotPassword'
 import SetPassword from '../public_part/SetPassword'
 import {isAuthenticated} from '../PrivateRouter/auth'
+import Table from '../Private_Part/Pages/table'
+import profile from '../Private_Part/Pages/profile'
+import CreateBlog from '../Private_Part/Pages/CreateBlog'
+import Resetpassword from '../Private_Part/Pages/ResetPassword'
 function RouterFile() {
     if(isAuthenticated() !== false){
         <Route exact path="/" component={Dashboard} />
@@ -18,14 +22,12 @@ function RouterFile() {
     return (
         <div className="App">
             <Router>
-      <Header />
 
         <Switch>
 
         {(isAuthenticated() )? <Route exact path="/" component={Dashboard} />
          : <Route exact path="/" component={Home} />}
 
-            <Route exact path="/" component={Home}/>
             <Route exact path="/home" component={Home}/>
             <Route exact path="/contactus" component={CountctUs}/>
             <Route exact path="/login" component={LoginForm}/>
@@ -34,6 +36,14 @@ function RouterFile() {
             <Route exact path="/registration" component={RegistrationForm}/>
 
             <ProtectedRoute exact path="/dash" component={Dashboard}/>
+            <ProtectedRoute exact path="/table" component={Table}/>
+            <ProtectedRoute exact path="/profile" component={profile}/>
+            <ProtectedRoute exact path="/createblog" component={CreateBlog}/>
+            <ProtectedRoute exact path="/changepassword" component={Resetpassword}/>
+            <ProtectedRoute exact path="/table" component={Table}/>
+
+
+
             {/* <Route path="*" component={Errorpage}/> */}
         </Switch>
         </Router>

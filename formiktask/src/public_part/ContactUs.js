@@ -51,6 +51,8 @@ const[data,setdata]=useState(
 
     return (
         <div >
+      <Header />
+
       <div className="contactus">
         <Formik
           initialValues={initialValues}

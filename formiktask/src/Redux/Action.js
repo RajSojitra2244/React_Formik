@@ -159,7 +159,7 @@ export const SendingLoginRequest = (data,props) => {
             setTimeout(()=>{
                 localStorage.setItem('logintoken', data.token)
                 props.history.push("/dash")
-            })
+            },2000)
             toast.success(Response.data.message)
             }
       })

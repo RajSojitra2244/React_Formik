@@ -141,33 +141,3 @@ export const Loginreducer = (state = Logindata, action) => {
       return state;
   }
 }
-//----------------------------PublicBlog---------------------------------------------//
-
-export const PublicBlogReducer = (state = PublicBlog, action) => {
-  switch (action.type) {
-    case FETCH_BLOG_BEGIN:
-      return {
-        ...state,
-        loading: true,
-      };
-
-    case FETCH_BLOG_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        Blog: action.payload,
-        error: ""
-      };
-
-    case FETCH_BLOG_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
-        Blog: [],
-      };
-
-    default:
-      return state;
-  }
-}

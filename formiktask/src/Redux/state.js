@@ -42,3 +42,23 @@ export const SetPassword = {
     loading: false,
     error: null
 }
+export const CreateBlog = {
+    data: [],
+    loading: false,
+    error: null
+}
+export const PrivateBlog = {
+    allprivateblog: [],
+    loading: false,
+    error: null
+}
+export const DeletePrivateBlog = {
+    data: [],
+    loading: false,
+    error: null
+}
+export const ChangePassword = {
+    data: [],
+    loading: false,
+    error: null
+}

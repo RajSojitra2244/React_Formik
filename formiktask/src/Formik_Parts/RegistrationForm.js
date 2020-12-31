@@ -195,6 +195,8 @@ function onChange(value) {
  }
     return (
         <div>
+      <Header />
+
         <div className="registration">
        <Formik
        initialValues={initialValues}

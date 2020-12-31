@@ -2,16 +2,14 @@ import React from 'react';
 import {Navbar,Form,Button,NavDropdown,FormControl,Nav} from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import {isAuthenticated} from '../PrivateRouter/auth'
+import Dashboard from '../Private_Part/Dashboard';
 import Privateheader from '../Private_Part/header/Privateheader'
 
 function Header() {
   return (
     <div>
 
-      {(isAuthenticated()) ? 
-      
-      <Privateheader/>
-      :
+
                   
 <Navbar collapseOnSelect  bg="dark" variant="dark">
   <Navbar.Brand href="/">Bloge</Navbar.Brand>
@@ -32,7 +30,7 @@ function Header() {
             
 
       
-      }
+      
 
     </div>
   );

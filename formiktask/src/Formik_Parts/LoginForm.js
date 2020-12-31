@@ -41,6 +41,7 @@ const signup =()=>{
 }
   return (
     <div>
+      <Header />
       <div className="login">
         <Formik
           initialValues={initialValues}
@@ -54,7 +55,6 @@ const signup =()=>{
                 <div className="col-6">
                   <img src={Loginimg}/>
                 </div>
-
                   <div className="col-6">
                 <Card.Body>
                   <Card.Title className="cardtitle"><h1>Login</h1></Card.Title>
