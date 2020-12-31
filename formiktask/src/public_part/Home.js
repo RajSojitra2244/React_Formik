@@ -10,6 +10,7 @@ import {getAllPublicBlog } from '../Redux/Blog/BlogAction'
 import {useDispatch,useSelector} from 'react-redux'
 import Blog from '../IMG/blog.jpg'
 import { Carousel } from 'antd';
+import { toast } from 'react-toastify'
 
 function Home() {
     const [index, setIndex] = useState(0);
@@ -28,7 +29,6 @@ const handleSelect = (selectedIndex, e) => {
     return (
         <div>
       <Header />
-
       <Carousel autoplay>
     <div>
       <img src={S1}/>
@@ -39,7 +39,6 @@ const handleSelect = (selectedIndex, e) => {
     <div>
       <img src={S3}/>
     </div>
-    
   </Carousel>,
     <div className="site-card-wrapper">
             <Row gutter={16}>
@@ -52,6 +51,7 @@ const handleSelect = (selectedIndex, e) => {
                           hoverable
                           style={{ width: 240 }}
                           className="Blogcard"
+                          
                           cover={<img alt="example" src={Blog} />}
                         >
                           <div className="row">
@@ -62,7 +62,9 @@ const handleSelect = (selectedIndex, e) => {
                               />
                             </div>
                             <div className="col-4">
-                              <img src={Delete}  className="deleteicon" />
+                              <img src={Delete} 
+                              onClick={()=>toast.error("Please Login")}
+                              className="deleteicon" />
                             </div>
                           </div>
                         </Card>

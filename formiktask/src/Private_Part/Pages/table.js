@@ -11,6 +11,7 @@ function Table() {
 console.log("table",getprivateblog);
 useEffect(() => {
     dispatch(GetBlogById());
+
   }, []);
     return (
         <div>
