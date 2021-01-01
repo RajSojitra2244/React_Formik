@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {toast}from 'react-toastify'
+import { HeaderWithToken } from '../../../../Services/headerservice';
 export const FETCH_DELETEBLOG_BEGIN = 'FETCH_DELETEBLOG_BEGIN';
 export const FETCH_DELETEBLOG_SUCCESS = 'FETCH_DELETEBLOG_SUCCESS';
 export const FETCH_DELETEBLOG_FAILURE = 'FETCH_DELETEBLOG_FAILURE';
@@ -19,17 +20,12 @@ export const fetchdELETEbLOGFailure = (error) => ({
 });
 
 export const DeleteBlogById= (deleteId,props) => {
-    const localstoragetoken =localStorage.getItem('logintoken')
     console.log("DeleteAction",deleteId);
   return (dispatch) => {
     dispatch(fetchdELETEbLOGBegin());
-    axios.delete(`${process.env.REACT_APP_API}/api/deleteBlog/${deleteId}`,
-      {
-        headers: {
-            'Authorization': localstoragetoken,
-            'content-type': "application/json"
-        }
-    })
+    axios.delete(`${process.env.REACT_APP_API}/api/deleteBlog/${deleteId}`,HeaderWithToken()
+    
+    )
       .then((Response) => {
           console.log("DeleteBlog_Response",Response);
           if(Response.data.ResponseStatus == 0){

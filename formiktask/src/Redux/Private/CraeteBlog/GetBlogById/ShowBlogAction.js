@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {toast}from 'react-toastify'
+import { HeaderWithToken } from '../../../../Services/headerservice';
 export const FETCH_ShowBlog_BEGIN = 'FETCH_ShowBlog_BEGIN';
 export const FETCH_ShowBlog_SUCCESS = 'FETCH_ShowBlog_SUCCESS';
 export const FETCH_ShowBlog_FAILURE = 'FETCH_ShowBlog_FAILURE';
@@ -19,17 +20,10 @@ export const fetchShowBlogFailure = (error) => ({
 });
 
 export const GetBlogById = () => {
-    const localstoragetoken =localStorage.getItem('logintoken')
   return (dispatch) => {
     dispatch(fetchShowBlogBegin());
     axios
-      .get(`${process.env.REACT_APP_API}/api/getBlogById`,
-      {
-        headers: {
-            'Authorization': localstoragetoken,
-            'content-type': "application/json"
-        }
-    })
+      .get(`${process.env.REACT_APP_API}/api/getBlogById`,HeaderWithToken())
       .then((Response) => {
           console.log("GetBlog",Response);
         dispatch(fetchShowBlogSuccess(Response.data.blog));

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {toast}from 'react-toastify'
+import { HeaderWithToken } from '../../../../Services/headerservice';
 export const FETCH_CHANGEPASSWORD_BEGIN = 'FETCH_CHANGEPASSWORD_BEGIN';
 export const FETCH_CHANGEPASSWORD_SUCCESS = 'FETCH_CHANGEPASSWORD_SUCCESS';
 export const FETCH_CHANGEPASSWORD_FAILURE = 'FETCH_CHANGEPASSWORD_FAILURE';
@@ -23,13 +24,7 @@ export const ChangePasswordRequest= (data,onSubmitProps,props) => {
     console.log("asdas",data);
   return (dispatch) => {
     dispatch(fetchChangePasswordBegin());
-    axios.put(`${process.env.REACT_APP_API}/api/changePassword/`,data,
-      {
-        headers: {
-            'Authorization': localstoragetoken,
-            'content-type': "application/json"
-                 }
-       })
+    axios.put(`${process.env.REACT_APP_API}/api/changePassword/`,data,HeaderWithToken())
       .then((Response) => {
           console.log("CreateBlog_Response",Response);
           if(Response.data.ReturnCode == 0){
@@ -37,7 +32,8 @@ export const ChangePasswordRequest= (data,onSubmitProps,props) => {
                   toast.success(Response.data.message)
                   setTimeout(()=>{
                       onSubmitProps.resetForm();
-                  },5000)
+                      props.history.push('/dash')
+                  },2000)
           }
       })
       .catch((error) => {

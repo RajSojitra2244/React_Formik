@@ -2,9 +2,7 @@ import React from 'react'
 import{Switch,Route, BrowserRouter as Router}from 'react-router-dom'
 import LoginForm from '../Formik_Parts/LoginForm'
 import RegistrationForm from '../Formik_Parts/RegistrationForm'
-import Header from '../public_part/header'
 import Home from '../public_part/Home'
-import { ToastContainer, toast } from 'react-toastify';
 import Dashboard from '../Private_Part/Dashboard'
 import ProtectedRoute from '../PrivateRouter/ProtectedRoute'
 import CountctUs from '../public_part/ContactUs'
@@ -15,6 +13,8 @@ import Table from '../Private_Part/Pages/table'
 import profile from '../Private_Part/Pages/profile'
 import CreateBlog from '../Private_Part/Pages/CreateBlog'
 import Resetpassword from '../Private_Part/Pages/ResetPassword'
+import PageNotFound from '../Private_Part/Pages/PageNotFound'
+import Comment from '../Private_Part/Pages/Comment'
 function RouterFile() {
     if(isAuthenticated() !== false){
         <Route exact path="/" component={Dashboard} />
@@ -22,9 +22,7 @@ function RouterFile() {
     return (
         <div className="App">
             <Router>
-
         <Switch>
-
         {(isAuthenticated() )? <Route exact path="/" component={Dashboard} />
          : <Route exact path="/" component={Home} />}
 
@@ -41,6 +39,9 @@ function RouterFile() {
             <ProtectedRoute exact path="/createblog" component={CreateBlog}/>
             <ProtectedRoute exact path="/changepassword" component={Resetpassword}/>
             <ProtectedRoute exact path="/table" component={Table}/>
+            <ProtectedRoute exact path="/comment" component={Comment}/>
+
+            <ProtectedRoute  path="*" component={PageNotFound}/>
 
 
 

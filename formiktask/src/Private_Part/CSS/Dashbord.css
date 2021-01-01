@@ -17,3 +17,17 @@
       width: 25px;
       margin-left: 85%;
   }
+  .commenticon{
+    height: 30px;
+    width: 30px;
+    margin-left: 85%;
+  }
+.loder{
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+}
+.allicon{
+  margin-right: 50px;
+  margin-top: 15px
+}

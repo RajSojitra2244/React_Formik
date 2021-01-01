@@ -1,0 +1,19 @@
+.commentcard{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+.footerby{
+    margin-left: 75%;
+}
+.sendcomment{
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+}
+.commentinput{
+    margin-left: 15px;
+}
+.cardcomment{
+    width: 538px !important;
+}

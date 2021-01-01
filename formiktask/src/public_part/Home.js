@@ -10,6 +10,8 @@ import {getAllPublicBlog } from '../Redux/Blog/BlogAction'
 import {useDispatch,useSelector} from 'react-redux'
 import Blog from '../IMG/blog.jpg'
 import { Carousel } from 'antd';
+import Loader from 'react-loader-spinner'
+import '../css/Home.css'
 import { toast } from 'react-toastify'
 
 function Home() {
@@ -29,17 +31,24 @@ const handleSelect = (selectedIndex, e) => {
     return (
         <div>
       <Header />
-      <Carousel autoplay>
-    <div>
-      <img src={S1}/>
-    </div>
-    <div>
-      <img src={S2}/>
-    </div>
-    <div>
-      <img src={S3}/>
-    </div>
-  </Carousel>,
+
+  
+  <Carousel autoplay>
+  <div>
+    <img src={S1}/>
+  </div>
+  <div>
+    <img src={S2}/>
+  </div>
+  <div>
+    <img src={S3}/>
+  </div>
+</Carousel>
+
+      
+{  GetPublicBlog !==undefined && GetPublicBlog.length==0&& 
+ <Loader type="ThreeDots" className="loder" color="#00BFFF" height={80} width={80}/>}
+
     <div className="site-card-wrapper">
             <Row gutter={16}>
               {GetPublicBlog &&
@@ -57,6 +66,7 @@ const handleSelect = (selectedIndex, e) => {
                           <div className="row">
                             <div className="col-8">
                               <Meta
+                              className="allbloghome"
                                 title={data.blogTitle}
                                 description={data.blogContent}
                               />

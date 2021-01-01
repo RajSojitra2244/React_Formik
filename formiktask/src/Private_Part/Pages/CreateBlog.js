@@ -22,7 +22,6 @@ function CreateBlog(props) {
     onSubmit = (values, onSubmitProps) => {
         console.log("blog_values",values);
       dispatch(CreateBlogRequest(values,onSubmitProps,props))
-      
     }
 
   const validationSchema = Yup.object({

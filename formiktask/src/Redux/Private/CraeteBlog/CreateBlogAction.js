@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {toast}from 'react-toastify'
+import { HeaderWithToken } from '../../../Services/headerservice';
 export const FETCH_CREATEBLOG_BEGIN = 'FETCH_CREATEBLOG_BEGIN';
 export const FETCH_CREATEBLOG_SUCCESS = 'FETCH_CREATEBLOG_SUCCESS';
 export const FETCH_CREATEBLOG_FAILURE = 'FETCH_CREATEBLOG_FAILURE';
@@ -19,17 +20,10 @@ export const fetchSetCreateBlogFailure = (error) => ({
 });
 
 export const CreateBlogRequest= (data,onSubmitProps,props) => {
-    const localstoragetoken =localStorage.getItem('logintoken')
   return (dispatch) => {
     dispatch(fetchSetCreateBlogBegin());
     axios
-      .post(`${process.env.REACT_APP_API}/api/createBlog/`,data,
-      {
-        headers: {
-            'Authorization': localstoragetoken,
-            'content-type': "application/json"
-        }
-    })
+      .post(`${process.env.REACT_APP_API}/api/createBlog/`,data,HeaderWithToken())
       .then((Response) => {
           console.log("CreateBlog_Response",Response);
           if(Response.data.ResponseStatus == 0){

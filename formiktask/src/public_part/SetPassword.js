@@ -20,6 +20,7 @@ function SetPassword() {
 const [UrlToken, setUrlToken] = useState()
     useEffect(()=>{
         const UrlPath = window.location.pathname.split('/')
+        console.log("UrlPath",UrlPath);
         setUrlToken(UrlPath[3])
     },[])
     const initialValues = {
