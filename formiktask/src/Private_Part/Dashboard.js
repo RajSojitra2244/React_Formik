@@ -13,6 +13,7 @@ import {DeleteBlogById}from '../Redux/Private/CraeteBlog/DeleteBlog/DeleteBlogAc
 import CommentIcon from '../IMG/comment.png'
 import LikeIcon from '../IMG/like.png'
 import DisIcon from '../IMG/dislike.png'
+import {IsEmpty}from '../Services/Service'
 
 function Dashboard(props) {
     const history = useHistory()
@@ -35,20 +36,17 @@ const ChangeImg=()=>{
 const GotoComment=(data)=>{
   console.log("CommentClick",data);
   history.push('/comment',data)
-  // <Redirect to="/comment" data={data}/>
 }
   return (
     <div>
       <Privateheader title="Dashbord">
-        {/* <div className="row"> */}
           <div className="mt-3">
-          { getprivateblog !==undefined&&  getprivateblog.length ==0 &&
+          { IsEmpty(getprivateblog) &&
            <Loader type="ThreeDots" className="loder" color="#00BFFF" height={80} width={80}/>}
-          {/* </div> */}
+
           <div className="site-card-wrapper">
             <Row gutter={16}>
-              
-              {getprivateblog &&
+              {!IsEmpty(getprivateblog) &&
                 getprivateblog.map((data) => {
                   {console.log("sasas")}
                   return (
@@ -68,7 +66,6 @@ const GotoComment=(data)=>{
                               />
                             </div>
                             <div className="col-4">
-                              {/* <img src={Delete} onClick={()=>{DeleteBlog(data._id)}} className="deleteicon" /> */}
                             </div>
                           </div>
                         <div className="row allicon">

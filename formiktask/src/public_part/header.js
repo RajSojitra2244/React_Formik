@@ -1,29 +1,24 @@
 import React from 'react';
-import {Navbar,Form,Button,NavDropdown,FormControl,Nav} from 'react-bootstrap'
-import { ToastContainer, toast } from 'react-toastify';
-import {isAuthenticated} from '../PrivateRouter/auth'
-import Dashboard from '../Private_Part/Dashboard';
-import Privateheader from '../Private_Part/header/Privateheader'
-
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import '../css/Header.css'
 function Header() {
   return (
-    <div>               
-<Navbar collapseOnSelect  bg="dark" variant="dark">
-  <Navbar.Brand href="/">Bloge</Navbar.Brand>
-  <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="mr-auto">
-    </Nav>
-    <Nav>
-    <Nav.Link href="/">Home</Nav.Link>
-      <Nav.Link href="/contactus">Contact Us</Nav.Link>
-      <Nav.Link href="/login">
-      Get In Touch
-      </Nav.Link>
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
-       
-         </div>
+    
+    <div>
+     
+      <Navbar collapseOnSelect bg="dark" variant="dark" className="sticky">
+        <Navbar.Brand href="/">Bloge</Navbar.Brand>
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto"></Nav>
+          <Nav>
+            <Link to="/home" className="btn text-white">Home</Link>
+            <Link to="/contactus" className="btn text-white">Contact Us</Link>
+            <Link to="/login" className="btn text-white">Get In Touch</Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   );
 }
 

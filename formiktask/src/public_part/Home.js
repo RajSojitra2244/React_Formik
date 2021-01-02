@@ -1,21 +1,29 @@
 import React,{useState,useEffect} from 'react'
+import {useDispatch,useSelector} from 'react-redux'
+import { Card, Col, Row } from 'antd';
+import Loader from 'react-loader-spinner'
+import { Carousel } from 'antd';
+import { toast } from 'react-toastify'
+
+import '../css/Home.css'
 import Header from './header'
-// import { Carousel } from 'react-bootstrap'
+import {getAllPublicBlog } from '../Redux/Blog/BlogAction'
+import {IsEmpty} from '../Services/Service'
+
+import DisLikeIcon from '../IMG/dislike.png'
 import S1 from '../IMG/slider1.jpg'
 import S2 from '../IMG/slider2.jpg'
 import S3 from '../IMG/slider3.jpg'
+import LikeIcon from '../IMG/like.png'
 import Delete from '../IMG/delete.png'
-import { Card, Col, Row } from 'antd';
-import {getAllPublicBlog } from '../Redux/Blog/BlogAction'
-import {useDispatch,useSelector} from 'react-redux'
 import Blog from '../IMG/blog.jpg'
-import { Carousel } from 'antd';
-import Loader from 'react-loader-spinner'
-import '../css/Home.css'
-import { toast } from 'react-toastify'
+import CommentIcon from '../IMG/comment.png'
+
 
 function Home() {
     const [index, setIndex] = useState(0);
+    const [like, setlike] = useState(false)
+
     const dispatch=useDispatch()
     const { Meta } = Card;
 
@@ -25,9 +33,9 @@ console.log("GetPublicBlog",GetPublicBlog);
     useEffect(() => { 
         dispatch(getAllPublicBlog())
 },[])
-const handleSelect = (selectedIndex, e) => {
-  setIndex(selectedIndex);
-};
+const ChangeImg=()=>{
+  setlike(!like)
+}
     return (
         <div>
       <Header />
@@ -46,10 +54,10 @@ const handleSelect = (selectedIndex, e) => {
 </Carousel>
 
       
-{  GetPublicBlog !==undefined && GetPublicBlog.length==0&& 
+{ IsEmpty(GetPublicBlog) &&
  <Loader type="ThreeDots" className="loder" color="#00BFFF" height={80} width={80}/>}
 
-    <div className="site-card-wrapper">
+    <div className="site-card-wrapper HOMECARD">
             <Row gutter={16}>
               {GetPublicBlog &&
                 GetPublicBlog.map((data) => {
@@ -72,11 +80,21 @@ const handleSelect = (selectedIndex, e) => {
                               />
                             </div>
                             <div className="col-4">
-                              <img src={Delete} 
-                              onClick={()=>toast.error("Please Login")}
-                              className="deleteicon" />
+                             
                             </div>
                           </div>
+                          <div className="row allicon">
+                        <div className="col-4">
+                                  <img src={like?DisLikeIcon:LikeIcon} onClick={ChangeImg}  className="commenticon"/>
+                            </div>
+                            <div className="col-4">
+                                  <img src={CommentIcon} onClick={()=>toast.error("Please Login")} className="commenticon"/>
+                            </div>
+                            <div className="col-4">
+                            <img src={Delete} onClick={()=>toast.error("Please Login")} className="deleteicon" />
+
+                            </div>
+                        </div>
                         </Card>
                       </Col>
                     </div>

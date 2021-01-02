@@ -26,6 +26,7 @@ import backbutton from '../IMG/back-button.png'
 ];
 function RegistrationForm(props) {
     let  dispatch = useDispatch()
+    const history = useHistory()
     if (isAuthenticated() !== false) {
         history.push("/")
     }
@@ -46,7 +47,6 @@ console.log("EmailStatusSuccess",EmailStatusError.signupfail);
          dispatch(getcountry())
 },[])
  
-const history = useHistory()
     {EmailStatusSuccess.ResponseStatus=== 0 
         && FormNumber==4  && 
         setTimeout(()=>{
@@ -251,15 +251,7 @@ function onChange(value) {
             data-placement="top" 
             title="Terms and Conditions"><i className="fa fa-photo" style={ Registration?null:FormNumber==4?firsttext:null}  aria-hidden="true">4</i></a>
         </div>
-        {/* <div className="steps-step-2">
-            <a href="#step-4" 
-            type="button" 
-            style={Registration?first:null}
-            className="btn btn-blue-grey btn-circle-2 waves-effect mr-0" 
-            data-toggle="tooltip" 
-            data-placement="top" 
-            title="Finish"><i className="fa fa-check"  style={Registration?firsttext:null} aria-hidden="true"></i></a>
-        </div> */}
+       
     </div>
 </div>
  <Card className="card">
