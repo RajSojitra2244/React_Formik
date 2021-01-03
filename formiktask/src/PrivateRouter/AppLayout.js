@@ -11,7 +11,7 @@ function AppLayout(props) {
                   props.history.push("/")
               })
           }}
-          >logout</button>   */}
+          >logout</buttonl>   */}
         </div>
     )
 }

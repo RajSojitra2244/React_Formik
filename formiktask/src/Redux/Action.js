@@ -1,7 +1,6 @@
 import axios from 'axios';
-import Auth from '../PrivateRouter/auth'
-
 import {toast}from 'react-toastify'
+import { CommonHeader } from '../Services/headerservice';
 export const FETCH_COUNTRY_BEGIN = 'FETCH_COUNTRY_BEGIN';
 export const FETCH_COUNTRY_SUCCESS = 'FETCH_COUNTRY_SUCCESS';
 export const FETCH_COUNTRY_FAILURE = 'FETCH_COUNTRY_FAILURE';
@@ -24,7 +23,7 @@ export const getcountry = () => {
   return (dispatch) => {
     dispatch(fetchCountryBegin());
     axios
-      .get(`${process.env.REACT_APP_API}/api/getAllCountry`)
+      .get(`${process.env.REACT_APP_API}/api/getAllCountry`,CommonHeader())
       .then((Response) => {
         const country = Response.data.countryList;
         dispatch(fetchCountrySuccess(country));
@@ -58,7 +57,7 @@ export const getState = (stateId) => {
   return (dispatch) => {
     dispatch(fetchStateBegin());
     axios
-      .get(`${process.env.REACT_APP_API}/api/getStateById/${stateId}`)
+      .get(`${process.env.REACT_APP_API}/api/getStateById/${stateId}`,CommonHeader())
       .then((Response) => {
         const country = Response.data.stateList;
         // console.log(country);
@@ -102,7 +101,7 @@ export const SendingSignUpRequest = (data,onSubmitProps) => {
     dispatch(fetchSignupBegin());
 
     axios
-      .post(`${process.env.REACT_APP_API}/api/signin`,data)
+      .post(`${process.env.REACT_APP_API}/api/signin`,data,CommonHeader())
       .then((Response) => {
         if(Response.data.ResponseStatus !== 0){
           toast.error(Response.data.message)
@@ -147,7 +146,7 @@ export const SendingLoginRequest = (data,props) => {
   return (dispatch) => {
     dispatch(fetchLoginBegin());
     axios
-      .post(`${process.env.REACT_APP_API}/api/login`,data)
+      .post(`${process.env.REACT_APP_API}/api/login`,data,CommonHeader())
       .then((Response) => {
         const data = Response.data
         if(Response.data.ResponseStatus !== 0){
@@ -159,7 +158,7 @@ export const SendingLoginRequest = (data,props) => {
             setTimeout(()=>{
                 localStorage.setItem('logintoken', data.token)
                 props.history.push("/dash")
-            })
+            },2000)
             toast.success(Response.data.message)
             }
       })

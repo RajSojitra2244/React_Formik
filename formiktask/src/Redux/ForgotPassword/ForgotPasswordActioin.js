@@ -25,7 +25,6 @@ export const ForgotPasswordRequest= (data,onSubmitProps) => {
     axios
       .post(`${process.env.REACT_APP_API}/api/forgetPassword/`,data)
       .then((Response) => {
-          console.log("ContactUs_Response",Response);
       const  contactresponse = Response.data;
         dispatch(fetchForgotPasswordSuccess(contactresponse));
         toast.success(Response.data.message)

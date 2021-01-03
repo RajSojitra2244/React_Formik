@@ -12,12 +12,17 @@ import {
 export const SidebarData = () => [
     {
         title: 'Home',
-        path: '/',
+        path: '/dash',
         icon: <PieChartOutlined/>,
     },
     {
-        title: 'About',
-        path: '/about',
+        title: 'Profile',
+        path: '/profile',
+        icon: <DesktopOutlined/>,
+    },
+    {
+        title: 'Table',
+        path: '/table',
         icon: <DesktopOutlined/>,
     },
 ]

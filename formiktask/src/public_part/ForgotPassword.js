@@ -35,6 +35,8 @@ function ForgotPassword() {
       })
     return (
         <div>
+      <Header />
+
              <div >
       <div className="contactus forgotpsdMain">
         <Formik

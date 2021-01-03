@@ -25,9 +25,7 @@ export const getAllPublicBlog = () => {
     axios
       .get(`${process.env.REACT_APP_API}/api/getAllBlog`)
       .then((Response) => {
-          console.log("Blog_Response",Response);
-        // const country = Response.data.countryList;
-        // dispatch(fetchBlogSuccess(country));
+        dispatch(fetchBlogSuccess(Response.data.blogList));
       })
       .catch((error) => {
         const errors = error.message;

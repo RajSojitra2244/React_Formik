@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import{BrowserRouter,Switch,Route}from 'react-router-dom'
 import Index from './PrivateRouter/index'
 ReactDOM.render(
