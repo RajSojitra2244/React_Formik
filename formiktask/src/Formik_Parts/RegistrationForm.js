@@ -78,9 +78,9 @@ console.log("EmailStatusSuccess",EmailStatusError.signupfail);
     }
   const validationSchema= Yup.object(
             initialValues.name==''&&{
-            name:Yup.string().required('Required!'),
+            name:Yup.string().required('Name is Required!'),
             // phoneNo: Yup.number().typeError('Only Number Allowed').min(10).max(10).required('PhoneNo Required*'),
-            email:Yup.string().email('Invalid Email format').required('Required!') }   )
+            email:Yup.string().email('Invalid Email format').required('Email Is Required!') }   )
  const validateSkills = values => {
     let error
      if( values.length ==0){
@@ -88,9 +88,9 @@ console.log("EmailStatusSuccess",EmailStatusError.signupfail);
       }
     return error
 }
-const validatePassword = values => {
+const validatePhoneNo = values => {
     let error
-    let phoneno = /^\d{10}$/
+    const phoneno = /^\d{10}$/
      if(values.match(phoneno)){
         error = ""
       }else{ error="Enter valid Number!!"}
@@ -99,7 +99,7 @@ const validatePassword = values => {
 const validateCourse = values => {
     let errors
      if( values===''){
-        errors = "Required!"
+        errors = " Course Is Required!"
         }
     return errors
 }
@@ -107,7 +107,7 @@ const validatepassword = values => {
     setPassword(values)
     let errors
     if( values===''){
-        errors = "Required!"
+        errors = "Password Is Required!"
     }
     if(values.length < 6){  errors ="Enter minimum six digit"}
     return errors
@@ -115,7 +115,7 @@ const validatepassword = values => {
 const validateconfimPassword = values => {
     let errors
     if( values===''){
-        errors = "Required!"
+        errors = "Confirmpassword is Required!"
          return errors
         }
         if(values !== Password){ 
@@ -125,7 +125,7 @@ const validateconfimPassword = values => {
 }
 const validatepincode = values => {
     let errors
-    if( values===''){ errors = "Required!" }
+    if( values===''){ errors = "Pincode IS Required!" }
     if(values.length != 6){  errors ="Enter minimum six digit"}
     return errors
 }
@@ -285,7 +285,7 @@ function onChange(value) {
                     control='input'
                     type='text'
                     lable='Phone no*'
-                    validate={validatePassword}
+                    validate={validatePhoneNo}
                     name='phoneNo'
                     />
                 

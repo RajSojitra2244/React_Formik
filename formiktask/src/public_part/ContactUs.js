@@ -94,10 +94,12 @@ const[data,setdata]=useState(
                       type='text'
                       lable='Message'
                       name='message'
+                      maxlength="30"
                     />
                     <div className="row">
                       <div className="col-6">
-                        <button type="submit" className="btn btn-primary Cbutton " disabled={!formik.isValid}>Submit</button>
+                        <button type="submit" className="btn btn-primary Cbutton "
+                         disabled={!formik.isValid}>Submit</button>
                       </div>
                       
                     </div>
